@@ -1,0 +1,132 @@
+\startluacode
+framecount=0 -- the initial frame count
+
+--Methods
+
+--[[
+@param array a table that contains all the array elements
+@return a table that has all elements of array with colors and key initialized for each element in the format
+			element.key
+			element.color
+--]]
+function initArray(array)
+	local arrayElements = {}
+	for i, key in ipairs(array) do
+		local eachElement = {}
+		eachElement.key = key
+		eachElement.color="white"
+		arrayElements[i] = eachElement
+	end
+	return arrayElements
+end
+
+--[[
+adds a new marker to the list of markers that are already available
+
+@param markers the list of current markers as a table
+@param index at which the marker must be displayed
+@param height height of the marker in pp
+@param text the text that must be displayed with the marker
+@param color the color of the marker
+@return returns the markers table with the added marker element
+--]]
+function addMarker(markers, index, height, text, color)
+	markers[#markers+1] = {}
+	markers[#markers].index = index
+	markers[#markers].height = height
+	markers[#markers].text = text
+	markers[#markers].color = color
+	return markers
+end
+
+--[[
+displays the algorithm with the current line highlighted
+
+@params list of numbers, the lines that have to be highlighted
+--]]
+function showPseudoCode(...)				
+	context("boxjoin(a.sw=b.nw;);")
+	for i=1,#program do
+		context("boxit.l"..i.."(btex "..program[i].."  etex)((1,0.5,0.5),0.8);l"..i..".dy=4;")
+		if i == 1 then
+			context("l1.w = (50bp,230bp);")
+		end
+		context("drawleftunboxed(l"..i..");")
+	end
+	argpos = 1
+	while arg[argpos] do  
+		context("fillboxed(l"..arg[argpos]..");")
+		argpos = argpos + 1
+	end
+end
+
+--[[
+draws an array given the array and the markers
+
+@param array the array that has to be drawn
+@param markers the markers table
+@param nodeX the x co-ordinate for center for array(optional)
+@param nodeX the y co-ordinate for center for array(optional)
+--]]
+function drawArray(array,markers,nodeX,nodeY,boxN, scale)
+	local i=1
+	local markerScale,dx
+	if not scale then
+		if(#array <= 12) then
+			scale = 1
+			markerScale=0.8
+			dx=10
+		else
+			scale = 14/#array
+			print(scale)
+			markerScale=scale*0.8
+			dx=scale*8
+		end
+	else
+		markerScale=scale*0.8
+		dx=scale*8
+	end
+	if not boxN then
+		boxN = "1"
+	end
+	context("defaultscale := "..markerScale..";")
+	context("boxjoin(a.se=b.sw; a.ne=b.nw);")
+	for i,element in ipairs(array) do
+		bname="B"..boxN.."_"..i
+		context("boxit."..bname.."(btex "..element.key.." etex)("..element.color..","..scale..");")
+		context(bname..".dx="..dx..";")
+		i=i+1
+	end
+
+	if nodeX and nodeY then
+		bname="B"..boxN.."_"..math.modf((#array+1)/2)
+		if math.mod(#array, 2) == 0 then
+			context(bname..".e=("..nodeX..","..nodeY..");")
+		else
+			context(bname..".c=("..nodeX..","..nodeY..");")
+		end
+	end		
+	context("drawboxed(B"..boxN.."_1")
+	i=2
+	for i,element in ipairs(array) do
+		bname="B"..boxN.."_"..i
+		context(","..bname)
+		i=i+1
+	end
+	context(");")
+	i=1
+	for i,element in ipairs(array) do
+		bname="B"..boxN.."_"..i
+		context("label.top(\""..(i-1).."\","..bname..".n);")
+		i=i+1
+	end
+	i=1
+	for i, marker in ipairs(markers) do 
+		bname="B"..boxN.."_"..marker.index
+		context("drawMarker("..bname..")("..marker.height..",\""..marker.text.."\","..marker.color..");")
+		i=i+1
+	end
+	context("draw (-50,-50) -- (-50,30) withcolor transparent(0.0,0.0,white);")
+	framecount=framecount+1
+end
+\stopluacode

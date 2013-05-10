@@ -1,0 +1,325 @@
+-- version: 1.19
+-- file: finalpresentation
+-- format: cont-en
+-- stamp: 2012.05.30 11:26
+-- escape: [===[ ... ]===]
+
+local utilitydata = { }
+
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.variables = utilitydata.job.variables or { }
+utilitydata.job.variables.checksums = utilitydata.job.variables.checksums or { }
+utilitydata.job.variables.checksums={
+ ["new"]="22AF645D1859CB5CA6DA0C484F1F37EA",
+ ["old"]="149603E6C03516362A8DA23F624DB945",
+}
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.variables = utilitydata.job.variables or { }
+utilitydata.job.variables.collected = utilitydata.job.variables.collected or { }
+utilitydata.job.variables.collected={
+ ["randomseed"]=0.54030669738553,
+}
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.passes = utilitydata.job.passes or { }
+utilitydata.job.passes.collected = utilitydata.job.passes.collected or { }
+utilitydata.job.passes.collected={
+ ["itemgroup"]={
+  { 5, "0" },
+  { 3, "0" },
+  { 4, "0" },
+  { 2, "0" },
+  { 2, "0" },
+  { 3, "0" },
+  { 3, "0" },
+  { 3, "0" },
+  { 3, "0" },
+  { 2, "0" },
+  { 2, "0" },
+  { 3, "0" },
+  { 4, "0" },
+  { 2, "0" },
+  { 3, "0" },
+  { 4, "0" },
+ },
+}
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.datasets = utilitydata.job.datasets or { }
+utilitydata.job.datasets.collected = utilitydata.job.datasets.collected or { }
+utilitydata.job.datasets.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.pagestates = utilitydata.job.pagestates or { }
+utilitydata.job.pagestates.collected = utilitydata.job.pagestates.collected or { }
+utilitydata.job.pagestates.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.structure = utilitydata.job.structure or { }
+utilitydata.job.structure.collected = utilitydata.job.structure.collected or { }
+utilitydata.job.structure.collected={
+ ["branches"]={},
+ ["name"]="finalpresentation",
+ ["type"]="text",
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.specials = utilitydata.structures.specials or { }
+utilitydata.structures.specials.collected = utilitydata.structures.specials.collected or { }
+utilitydata.structures.specials.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.counters = utilitydata.structures.counters or { }
+utilitydata.structures.counters.collected = utilitydata.structures.counters.collected or { }
+utilitydata.structures.counters.collected={
+ ["endnote"]={
+  { 0 },
+ },
+ ["figure"]={
+  { 0 },
+ },
+ ["footnote"]={
+  { 0 },
+ },
+ ["formula"]={
+  { 0 },
+ },
+ ["graphic"]={
+  { 0 },
+ },
+ ["intermezzo"]={
+  { 0 },
+ },
+ ["itemgroup:itemize"]={
+  { 0, 5, 3, 4, 2, 3, 3, 3, 3, 2, 3, 2, 3, 4 },
+  { 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+ },
+ ["realpage"]={
+  { 20 },
+ },
+ ["subpage"]={
+  { 0 },
+ },
+ ["table"]={
+  { 0 },
+ },
+ ["userpage"]={
+  { 20 },
+ },
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.lists = utilitydata.structures.lists or { }
+utilitydata.structures.lists.collected = utilitydata.structures.lists.collected or { }
+utilitydata.structures.lists.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.pages = utilitydata.structures.pages or { }
+utilitydata.structures.pages.collected = utilitydata.structures.pages.collected or { }
+utilitydata.structures.pages.collected={
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=2,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=3,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=4,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=5,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=6,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=7,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=8,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=9,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=10,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=11,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=12,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=13,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=14,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=15,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=16,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=17,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=18,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=19,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=20,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.references = utilitydata.structures.references or { }
+utilitydata.structures.references.collected = utilitydata.structures.references.collected or { }
+utilitydata.structures.references.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.references = utilitydata.structures.references or { }
+utilitydata.structures.references.referred = utilitydata.structures.references.referred or { }
+utilitydata.structures.references.referred={
+ { 8, 1 },
+ { 9, 12 },
+ { 11, 23 },
+ { 13, 32 },
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.registers = utilitydata.structures.registers or { }
+utilitydata.structures.registers.collected = utilitydata.structures.registers.collected or { }
+utilitydata.structures.registers.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.positions = utilitydata.job.positions or { }
+utilitydata.job.positions.collected = utilitydata.job.positions.collected or { }
+utilitydata.job.positions.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.objects = utilitydata.job.objects or { }
+utilitydata.job.objects.collected = utilitydata.job.objects.collected or { }
+utilitydata.job.objects.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.synonyms = utilitydata.structures.synonyms or { }
+utilitydata.structures.synonyms.collected = utilitydata.structures.synonyms.collected or { }
+utilitydata.structures.synonyms.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.structures = utilitydata.structures or { }
+utilitydata.structures.blocks = utilitydata.structures.blocks or { }
+utilitydata.structures.blocks.collected = utilitydata.structures.blocks.collected or { }
+utilitydata.structures.blocks.collected={
+}
+utilitydata = utilitydata or { }
+utilitydata.job = utilitydata.job or { }
+utilitydata.job.files = utilitydata.job.files or { }
+utilitydata.job.files.collected = utilitydata.job.files.collected or { }
+utilitydata.job.files.collected={
+}
+utilitydata.job.packed={
+ ["index"]={
+  {
+   ["conversionset"]="pagenumber",
+  },
+  {
+   ["connector"]="–",
+   ["prefix"]="no",
+   ["set"]="part",
+  },
+ },
+ ["keys"]={
+  ["directives"]=true,
+  ["metadata"]=true,
+  ["numberdata"]=true,
+  ["numbers"]=true,
+  ["pagedata"]=true,
+  ["prefixdata"]=true,
+  ["processors"]=true,
+  ["sectiondata"]=true,
+  ["specification"]=true,
+ },
+ ["version"]=1.01,
+}
+
+return utilitydata
+

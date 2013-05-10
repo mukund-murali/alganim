@@ -1,0 +1,268 @@
+\input ../API/baseAPI
+\input ../Algorithms/arrayAlgos
+\input ../Algorithms/treeAlgos
+\input ../Algorithms/listAlgos
+\input ../Algorithms/graphAlgos
+
+\usemodule[simpleslides]
+          [style=Sunrise]
+
+\setupTitle
+  [ title={Algorithm Animation in PDF Documents},
+   author={Manthosh Kumar T, Mukund M, Prakash E \crlf \crlf Supervisor \crlf R S Milton \crlf Department of CSE},
+     date={3rd May 2013},
+	titlealign=center,
+	authoralign=center,
+	datealign=center,
+	color=(0.8,0.8,0),
+  ]
+
+\starttext
+\placeTitle
+		
+\SlideTitle {Abstract}
+\startitemize
+\item Incorporate animated diagrams in PDF
+    documents for educational purpose.
+  \item  \ConTeXt \ (typesetting macro based on \TeX ) to
+    generate the PDF documents.  
+  \item Animation is a sequence of
+    layers with capabilities to play, pause, resume and rewind.  
+  \item A module for animation in \ConTeXt \ with JavaScript.
+  \item Animate algorithms for well-known data structures. Automatic layout of diagrams for arrays, lists, trees, and graphs. 
+\stopitemize
+
+
+\SlideTitle{Design and Implementation}
+\crlf
+\midaligned
+{\externalfigure[IA.png][height=9cm]}
+
+
+\SlideTitle{Major Work}
+\startitemize
+\item Standardize the Low-Level API and demonstrate its use with examples to create the High-Level API.
+\item Adapt the base JavaScript file of \ConTeXt \ which is used by the t-animation module to our animation needs.
+\item Create an interface to display the algorithm with its statements highlighted in sync with the animation of the data structure diagrams.
+\stopitemize
+
+\SlideTitle{User Classification }
+\crlf
+\crlf
+\crlf
+\midaligned
+{\externalfigure[UC.png][width=18cm]}
+
+\SlideTitle{Layout API}
+\startitemize
+\item Arrays
+\item Lists
+\item Trees
+\item Graphs
+\stopitemize
+
+\SlideTitle{Layout API --- Arrays}
+		\startitemize
+		\item Boxes joined together create an array structure.
+		\item To join the boxes, we use the following command
+		\definetyping[C][tab=2]
+		\startC
+			box.join(a.ne=b.nw;a.se=b.sw;)
+		\stopC
+		\stopitemize
+
+		\crlf Example: \crlf 
+		
+		Sorting of an Array - Selection Sort
+		\definetyping[C][tab=3]
+		\startC
+		selectionSort({51,31,4,224,23})
+		\stopC
+
+\SlideTitle{Arrays --- Examples}
+	\midaligned
+	{\startluacode
+		selectionSort({51,31,4,224})
+	\stopluacode}
+
+\SlideTitle{Layout API --- Lists}
+		\startitemize
+			\item Two ways of representing Lists
+				\startitemize
+					\item Abstract or Circular
+					\item Detailed or Rectangular
+				\stopitemize
+			\item Nodes are connected with arrow heads.
+			\item Markers to show currently accessed node.
+		\stopitemize
+		\definetyping[C][tab=1]
+		\startC
+			deleteListNodes({4,18},{1,2,3,4,5,6,54,3,158,23,54,76,18})
+		\stopC
+		\startluacode
+			deleteListNodes({4,18},{1,2,3,4,5,6,54,3 ,158,23,54,76,18})
+		\stopluacode
+
+\SlideTitle{Layout API --- Trees}
+		\startitemize
+			\item Binary Trees.
+			\item Node at same depth are spaced out evenly in X axis.
+			\item To accommodate more nodes in the tree diagram, as depth increases, spacing is reduced proportionately.
+		\stopitemize
+		\crlf Example : \crlf
+		Insertion in Binary Search Tree
+		\definetyping[C][tab=2]
+		\startC
+		bstCreate({50,25,75,12,37,63,87,6,18,31,43,57,69,81,93})
+		\stopC
+
+\SlideTitle{Trees - Example}
+		\crlf
+		\crlf
+		\crlf
+		\midaligned
+		{\startluacode
+			bstCreate({50,25,75,12,37,63,87,6,18,31,43,57,69,81,93})
+		\stopluacode}
+
+\SlideTitle{Layout API --- Graphs}
+		\startitemize
+			\item Force-Directed Algorithm – application of force to nodes and edges.
+			\item Aesthetically pleasing - Less Crossings.
+			\item Edges of almost equal length.
+		\stopitemize
+		\crlf Example : \crlf
+		Applying Dijkstra's algorithm
+		\definetyping[C][tab=2]
+		\startC
+		dijsktra(adjacencyMatrix,startVertex,endVertrex)
+		\stopC
+
+\SlideTitle{Graphs - Example}
+		\crlf
+		\crlf
+		\midaligned
+		{\startluacode
+		cost={
+--	 1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0
+	{0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	{1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	{0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
+	{1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
+	{1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0},
+	{0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0},
+	{0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0},
+	{0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0},
+	{0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0},
+	{0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0},
+	{0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0},
+	{0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0},
+	{0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1},
+	{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0},
+	{0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0},
+	{0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1},
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0},
+}
+dijsktra(cost,1,3)
+		\stopluacode}
+
+\SlideTitle{Fitting Diagrams in a Page}
+		\startitemize
+			\item Diagrams have to be accommodated within the PDF page regardless of the number of nodes in a diagram.
+			\item Scaling the nodes as the no. of nodes increases is useful.
+			\startformula Scaling\ Factor \ \alpha \ \frac{1}{No.\ of Nodes} \stopformula
+			\item But decreasing the scaling factor might alone is not enough to get the diagram inside the page. 
+		\stopitemize
+
+\SlideTitle{Fitting Diagrams in  a Page}
+		\startitemize
+			\item When there is a large number of nodes, the readability of the diagram decreases.
+			\item When the number of nodes exceeds a threshold, represent them by dots. The threshold depends on the data structure. 
+		\stopitemize
+		\midaligned
+		{\starttable[|l|l|l|]
+			\HL
+			\VL \bf{Data Structure} \VL \use{2} \bf{Threshold(in no. of nodes)} \VL \SR
+			\HL
+			\VL Array \VL \use{2} 80 \VL \AR
+			\HL
+			\VL \Lower(.5\lineheight){List} \VL Abstract \VL Detailed \VL \AR
+			\DC \DL[2] \DR
+			\VL \VL 80 \VL 60 \VL \AR
+			\HL
+			\VL Tree \VL \use{2} 6 (Depth of Tree) \VL \AR
+			\HL
+			\VL Graph \VL \use{2} 50 \VL \AR
+			\HL
+		\stoptable}
+
+\SlideTitle{Animation API}
+		\startitemize
+			\item \ConTeXt \ uses fieldstack mechanism to create overlapping layers
+(frames) written in JavaScript. This is crude and cannot be directly used
+to create animations. A third-party module, t-animation, makes it usable
+to create animations; yet, it has only minimal features.
+			\item Added three priority levels for frames: 
+				\crlf (i) Sequential Frames (ii) Normal frames, and (iii) Breakpoints.
+			\item This leads to adding the following features
+				\startitemize
+					\item Automatically pause at breakpoints
+					\item Automatically skip sequential frames
+				\stopitemize
+		\stopitemize
+
+\SlideTitle{Animation API}
+		\startitemize
+			\item The module supports options to play, pause, go to - next frame,
+previous frame, first frame, and last frame.
+			\item We have added the following options 
+				\startitemize
+					\item Increase/Decrease animation speed
+					\item Toggle automatic pasue at breakpoints
+					\item Toggle skipping of sequential frames
+					\item Go to --- next breakpoint, previous breakpoint
+				\stopitemize
+		\stopitemize
+
+\SlideTitle{Performance Analysis}
+	\crlf
+	\crlf
+	\midaligned
+		{\starttable[|l|l|]
+			\HL
+			\VL \bf{No. of Frames} \VL \bf{Time to Compile} \VL \SR
+			\HL
+			\VL 53 \VL 0:04 \VL \AR
+			\HL
+			\VL 88 \VL 0:10 \VL \AR
+			\HL
+			\VL 392 \VL 1:05 \VL \AR
+			\HL
+			\VL 886 \VL 3:53 \VL \AR
+			\HL
+			\VL 1279 \VL 8:29 \VL \AR
+			\HL
+			\VL 1663 \VL 11:12 \VL \AR
+			\HL
+		\stoptable}
+
+\SlideTitle{Conclusion}
+\startitemize
+	\item Efficient Low-levl API for the creation of data structure diagrams and animation. 
+	\item Examples for creating algorithm animations using the Low-level API.
+	\item Pseudo-Code is displayed alongside the animation, making it easy to follow.
+\stopitemize
+
+\SlideTitle{References}
+\startitemize
+	\item Personal correspondence with Wolfgang Schuster, the author of t-animation module of ConTEXt.
+			\crlf E-mail: wolfgang.schuster@gmail.com
+	\item Yifan Hu. Efficient and High-Quality Force-Directed Graph Drawing, Wolfram Research Inc., USA.
+	\item John D. Hobby. Drawing Boxes with MetaPost. [Online]. \crlf Available: http://www.tug.org/docs/metapost/mpboxes.pdf
+	\item Dennis Hotson. Springy.js – A force directed graph layout algorithm in JavaScript. [Online] \crlf Available: http://getspringy.com/
+\stopitemize
+
+\stoptext

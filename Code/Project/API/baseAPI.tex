@@ -1,0 +1,460 @@
+\usemodule[animation]
+\setupinteraction[state=start,click=off]
+
+\startsymbolset[mysymbols]
+  \definefiguresymbol [PreviousFrame]  [prev.png]
+  \definefiguresymbol [StartAnimation] [playpause.png]
+  \definefiguresymbol [NextFrame]      [next.png]
+  \definefiguresymbol [NextBreak]      [nextbreak.png]
+  \definefiguresymbol [PreviousBreak]  [prevbreak.png]
+  \definefiguresymbol [FirstFrame]     [prevend.png]
+  \definefiguresymbol [LastFrame]      [endnext.png]
+  \definefiguresymbol [Plus]           [plus.png]
+  \definefiguresymbol [Minus]          [minus.png]
+  \definefiguresymbol [TogglePause]    [togglepause.png]
+  \definefiguresymbol [ToggleSkip]     [toggleskip.png]
+\stopsymbolset
+
+\setupanimation[symbolset=mysymbols]
+\startMPinclusions
+% Macros for boxes
+
+
+% Find the length of the prefix of string s for which cond is true for each
+% character c of the prefix
+vardef str_prefix(expr s)(text cond) =
+  save i_, c; string c;
+  i_ = 0;
+  forever:
+    c := substring (i_,i_+1) of s;
+    exitunless cond;
+    exitif incr i_=length s;
+  endfor
+  i_
+enddef;
+
+% Take a string returned by the str operator and return the same string
+% with explicit numeric subscripts replaced by generic subscript symbols [].
+vardef generisize(expr ss) =
+  save res, s, l; string res, s;
+  res = "";             % result so far
+  s = ss;               % left to process
+  forever: exitif s="";
+    l := str_prefix(s, (c<>"[") and ((c<"0") or (c>"9")));
+    res := res & substring (0,l) of s;
+    s := substring (l,infinity) of s;
+    if s<>"":
+      res := res & "[]";
+      l := if s>="[":  1 + str_prefix(s, c<>"]")
+           else:  str_prefix(s, (c=".") or ("0"<=c) and (c<="9"))
+           fi;
+      s := substring(l,infinity) of s;
+    fi
+  endfor
+  res
+enddef;
+
+
+% Make sure the string _n_gen_ is generisize(_n_):
+vardef set_n_gen_ =
+  if _n_ <> _n_cur_:
+    _n_cur_:=_n_;
+    _n_gen_:=generisize(_n_);
+  fi
+enddef;
+
+string _n_, _n_cur_, _n_gen_;
+_n_cur_ := "]";              % this won't match _n_
+
+
+% Given a type t and list of variable names vars, make sure that they are
+% of type t and redeclare them as necessary.  In the vars list _n represents
+% scantokens _n_, a suffix that might contain numeric subscripts.
+% This suffix needs to be replaced by scantokens _n_gen_ in order to get
+% a variable that can be declared to be of type t.
+vardef generic_declare(text t) text vars =
+  set_n_gen_;
+  forsuffixes v_=vars:
+    if  forsuffixes _n=scantokens _n_: not t v_ endfor:
+      def _gdmac_ text _n = t v_ enddef;
+      expandafter _gdmac_ scantokens _n_gen_;
+    fi
+  endfor
+enddef;
+
+% Here is another version that redeclares the vars even if they are already
+% of the right type.
+vardef generic_redeclare(text t) text vars =
+  set_n_gen_;
+  def _gdmac_ text _n = t vars enddef;
+  expandafter _gdmac_ scantokens _n_gen_;
+enddef;
+
+
+
+
+
+
+
+% pp should be a string giving the name of a macro that finds the boundary path
+% sp should be a string that names a macro for fixing the size and shape
+% The suffix $ is the name of the box
+% The text t gives the box contents: either empty, a picture, or a string to
+% typeset
+def beginbox_(expr pp,sp,scaleVal)(suffix $)(text t) =
+  _n_ := str $;
+  generic_declare(pair) _n.off, _n.c;
+  generic_declare(string) pproc_._n, sproc_._n;
+  generic_declare(picture) pic_._n;
+  numeric scaleV;
+  scaleV := scaleVal;
+  pproc_$:=pp; sproc_$:=sp;
+  pic_$ = nullpicture;
+  for _p_=t:
+    pic_$:=
+      if picture _p_: _p_ scaled scaleV
+      else: _p_ infont defaultfont scaled defaultscale
+      fi;
+  endfor
+  $c = $off + .5[llcorner pic_$, urcorner pic_$]
+enddef;
+
+
+% The suffix cl names a vardef macro that clears box-related variables
+% The suffix $ is the name of the box being ended.
+def endbox_(suffix cl, $) =
+  if known pic_.prevbox: _dojoin(prevbox,$); fi
+  def prevbox = $ enddef;
+  expandafter def expandafter clearboxes expandafter =
+    clearboxes cl($);
+  enddef
+enddef;
+
+
+% Text t gives equations for joining box a to box b.
+def boxjoin(text t) =
+  def prevbox=_ enddef;
+  def _dojoin(suffix a,b) = t enddef;
+enddef;
+
+
+extra_beginfig := extra_beginfig
+  & "boxjoin();save pic_,sproc_,pproc_;def clearboxes=enddef;";
+extra_endfig := extra_endfig & "clearboxes";
+
+
+% Given a list of box names, give whatever default values are necessary
+% in order to fix the size and shape of each box.
+vardef fixsize(text t) =
+  forsuffixes $=t:  scantokens sproc_$($);  endfor
+enddef;
+
+
+% Given a list of box names, give default values for any unknown positioning
+% offsets
+vardef fixpos(text t) =
+  forsuffixes $=t:
+    if unknown xpart $.off:  xpart $.off=0; fi
+    if unknown ypart $.off:  ypart $.off=0; fi
+  endfor
+enddef;
+
+
+% Return the boundary path for the given box
+vardef bpath suffix $ =
+  fixsize($); fixpos($);
+  scantokens pproc_$($)
+enddef;
+
+
+% Return the contents of the given box.  First define a private version that
+% the user can't accidently clobber.
+vardef pic_mac_ suffix $ =
+  fixsize($); fixpos($);
+  pic_$ shifted $off
+enddef;
+
+
+vardef left_pic_mac_ suffix $ =
+  fixsize($); fixpos($);
+  pic_$ shifted $.w
+enddef;
+
+%vardef pic suffix $ = pic_mac_ $ enddef;
+
+
+def drawboxed(text t) =         % Draw each box
+  fixsize(t); fixpos(t);
+  forsuffixes s=t: drawfill bpath.s withcolor s.col;draw pic_mac_.s; draw bpath.s; endfor
+enddef;
+
+def fillboxed(text t) =         % Draw each box
+  fixsize(t); fixpos(t);
+  forsuffixes s=t: drawfill bpath.s withcolor s.col;draw left_pic_mac_.s; endfor
+enddef;
+
+def drawMarker(text t)(expr indH,indVal,indColor) =
+  forsuffixes s=t: draw s.nw+(0,5) -- s.sw-(0,indH) withpen pencircle scaled 1.5pt withcolor indColor;label.rt(indVal,s.sw-(0,indH)); endfor
+enddef;
+
+def drawunboxed(text t) =       % Draw contents of each box
+  fixsize(t); fixpos(t);
+  forsuffixes s=t: draw pic_mac_.s ; endfor
+enddef;
+
+def drawleftunboxed(text t) =       % Draw contents of each box
+  fixsize(t); fixpos(t);
+  forsuffixes s=t: draw left_pic_mac_.s ; endfor
+enddef;
+
+def drawboxes(text t) =         % Draw boundary path for each box
+  forsuffixes s=t: draw bpath.s; endfor
+enddef;
+
+% Rectangular boxes
+
+newinternal defaultdx, defaultdy;
+defaultdx := defaultdy := 8bp;
+
+vardef boxit@#(text tt)(expr cellColor,scaleVal) =
+  beginbox_("boxpath_","sizebox_",scaleVal,@#,tt);
+  generic_declare(pair) _n.sw, _n.s, _n.se, _n.e, _n.ne, _n.n, _n.nw, _n.w;
+    generic_declare(color) _n.col;
+  @#col := cellColor;
+  0 = xpart (@#nw-@#sw) = ypart(@#se-@#sw);
+  0 = xpart(@#ne-@#se) = ypart(@#ne-@#nw);
+  @#w = .5[@#nw,@#sw];
+  @#s = .5[@#sw,@#se];
+  @#e = .5[@#ne,@#se];
+  @#n = .5[@#ne,@#nw];
+  @#ne-@#c = @#c-@#sw = (@#dx,@#dy) + .5*(urcorner pic_@# - llcorner pic_@#);
+  endbox_(clearb_,@#);
+enddef;
+
+def boxpath_(suffix $) =
+  $.sw -- $.nw -- $.ne -- $.se -- cycle
+enddef;
+
+def sizebox_(suffix $) =
+  if unknown $.dx: $.dx=defaultdx; fi
+  if unknown $.dy: $.dy=$.dx; fi
+enddef;
+
+vardef clearb_(suffix $) =
+  _n_ := str $;
+  generic_redeclare(numeric) _n.sw, _n.s, _n.se, _n.e, _n.ne, _n.n, _n.nw, _n.w,
+    _n.c, _n.off, _n.dx, _n.dy;
+enddef;
+
+
+
+
+
+% Circular and oval boxes
+
+newinternal circmargin; circmargin:=2bp;  % default clearance for picture corner
+
+vardef circleit@#(text tt)(expr cellColor,scaleVal) =
+  beginbox_("thecirc_","sizecirc_",scaleVal,@#,tt);
+  generic_declare(pair) _n.n, _n.s, _n.e, _n.w,_n.ne, _n.sw, _n.se, _n.nw;
+  generic_declare(color) _n.col;
+  @#col := cellColor;
+  @#e-@#c = @#c-@#w = (@#dx,0) + .5*(lrcorner pic_@#-llcorner pic_@#);
+  @#n-@#c = @#c-@#s = (0,@#dy) + .5*(ulcorner pic_@#-llcorner pic_@#);
+  endbox_(clearc_,@#);
+enddef;
+
+def thecirc_(suffix $) =
+  $.e{up} ... $.n{left} ... $.w{down} ... $.s{right} ... cycle
+enddef;
+
+vardef clearc_(suffix $) =
+  _n_ := str $;
+  generic_redeclare(numeric) _n.n, _n.s, _n.e, _n.w, _n.c, _n.off, _n.dx, _n.dy;
+enddef;
+
+vardef sizecirc_(suffix $) =
+  save a_, b_;
+  (a_,b_) = .5*(urcorner pic_$ - llcorner pic_$);
+  if unknown $dx:
+    if unknown $dy:
+      if unknown($dy-$dx): a_+$dx=b_+$dy; fi
+      if a_+$dx=b_+$dy: a_+$dx = a_++b_ + circmargin;
+      else: $dx =
+        pathsel_(max(a_,b_+$dx-$dy), (a_+d_,0){up}...(0,b_+d_+$dy-$dx){left});
+      fi
+    else: $dx = pathsel_(a_, (a_+d_,0){up}...(0,b_+$dy){left});
+    fi
+  elseif unknown $dy:
+    $dy = pathsel_(b_, (a_+$dx,0){up}...(0,b_+d_){left});
+  fi
+enddef;
+
+vardef pathsel_(expr dhi)(text tt) =
+  save f_, p_; path p_;
+  p_ = origin..(a_,b_)+circmargin*unitvector(a_,b_);
+  vardef f_(expr d_) =
+    xpart((tt) intersectiontimes p_) >= 0
+  enddef;
+  solve f_(0,dhi+1.5circmargin)
+enddef;
+
+
+
+\stopMPinclusions
+\startluacode
+
+--Default Values
+scale = 7
+color1 = "(1,0.6,0.1)"
+color2 = "(0.5,0.8,0.1)"
+color3 = "(0,0,0.5)"
+color4 = "(1,1,0.5)"
+color5 = "(0.5,0.5,1)"
+color6 = "(0.52941176470588,0.8078431372549,0.98039215686275)"
+colorYellow = "(1,0.27058823529412,0)"
+colorGreen = "(0.678431,1,0.184314)"
+colorpink = "(1,0.5,0.5)"
+colorlightgreen = "(0.678431,1,0.184314)"
+colornew = "(1,0.27058823529412,0)"
+indColor1 = "(1,0.6,0.1)"
+indColor2 = "(0.5,0,0)"
+indColor3 = "(0,0,0.5)"
+
+--Methods
+--[[
+Sets the default scale value
+
+@param passedScale the scale value that has to be set
+--]]
+function setScale(passedScale)
+	scale = passedScale
+end
+
+--[[
+Draws a vertical line which makes the height of tree remain constant
+
+@param lineHeight the height of the line
+--]]
+function drawHeight(lineHeight)
+	context("draw (0,0) -- (0,"..-lineHeight..") withcolor transparent(0.0,.0,red);")
+end
+
+--[[
+this will setup the animation with the given options
+
+@param framerate frame rate that has to be set for the animation
+--]]
+function setupAnimation(frameRate)
+	context("\\setupanimation[framerate="..frameRate.."]")
+end
+
+--[[
+This will start the animation, all frames have to written only after this is called
+
+@param menu1 menu will be displayed if "yes" is passed
+@param repeat1 animation will be playes on loop if "yes" is passed
+--]]
+function startAnimation(menu1, repeat1)
+	context("\\startanimation[menu="..menu1..",repeat="..repeat1.."] ");
+end
+
+--[[
+marks the end of animation. any frames written after this will not be part of the animation
+--]]
+function stopAnimation()
+	context([[\stopanimation]]);
+end
+
+--[[
+starts a frame and sets the importance of it
+
+@param imp the importance of the frame, it can be 0,1 or 2 
+		0 - sequential frames
+		1 - normal frames
+		2 - breakpoints
+--]]
+function startFrame(imp)
+	if not imp then 
+		imp = 1
+	end
+	if imp == 1 then 
+		context("\\frame{")
+	elseif imp == 2 then
+		context("\\frame[+]{")
+	else
+		context("\\frame[-]{")
+	end
+end
+
+--[[
+starts a picture. All MetaPost code must be written only after a call to this function
+--]]
+function beginPicture()
+	context.startMPcode()
+end
+
+function startFrameAndPicture()
+	startFrame()
+	beginPicture()
+end
+
+
+--[[
+ends a picture. Any MetaPost written after a call to this will throw an error.
+--]]
+function endPicture()
+	context.stopMPcode()
+end
+
+--[[
+stops a frame
+--]]
+function stopFrame()
+	context("}")
+end
+
+function stopFrameAndPicture()
+	endPicture()
+	stopFrame()
+end
+
+--[[
+set default scale for the text
+
+@param defScale the scale value that has to be set
+--]]
+function setDefaultScale(defScale)
+	textSize = defScale
+	context("defaultscale := "..textSize..";")
+end
+
+--[[
+draws a line from point1 to point2
+
+@param x1 the x co-ordinate of point 1
+@param y1 the y co-ordinate of point 1
+@param x2 the x co-ordinate of point 2
+@param y2 the y co-ordinate of point 2
+--]]
+function drawLine(x1,y1,x2,y2)
+	context("draw ("..(x1*scale)..","..(y1*scale)..") --("..(x2*scale)..","..(y2*scale)..");")
+end
+
+--[[
+draws a circle with a label inside it with center at a point
+
+@param x x co-ordinate of the center point
+@param y y co-ordinate of the center point
+@param num the label that has to be written inside the circle
+@param nodeColor the fill color for the node(optional)
+@param labelColor the color the label(optional)
+@param radius the radius of the circle(optional)
+@param textSize size of the label(optional) in pp
+--]]
+function drawNode(x,y,num,nodeColor,labelColor,radius,textSize)
+	context("drawfill ("..((x-radius)*scale)..","..(y*scale)..") .. ("..(x*scale)..","..((y+radius)*scale)..") .. ("..((x+radius)*scale)..","..(y*scale)..") .. ("..(x*scale)..","..((y-radius)*scale)..")..cycle withcolor "..nodeColor..";")
+	context("defaultscale := "..textSize..";")
+	context("label(\""..num.."\", ("..(x*scale)..","..(y*scale)..")) withcolor "..labelColor..";")
+end
+\stopluacode

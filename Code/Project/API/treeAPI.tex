@@ -1,0 +1,282 @@
+\startluacode
+--Default Values
+
+treedx=6 			-- x-change
+treedy=5.0			-- y-change
+treeScale=7			-- scale factor
+treeRadius=1			-- node radius
+treeTextSize=0.8		-- label size for node
+treeHeight = 10			-- bounding box vertical length
+treeHeightdraw=10		-- 
+treeThreshold = 6		-- value after which nodes are displayed as dots
+treeMultiplicationFactor = 2	-- Factor for spacing nodes
+treeLabelColor = "black"	-- color of node label
+treeNodeColor = color4		-- color of node
+
+
+--Methods
+
+--[[
+displays the algorithm with the current line highlighted
+
+@param list of numbers, the lines that have to be highlighted
+--]]
+function showTreePseudoCode(...)				
+	context("boxjoin(a.sw=b.nw;);")
+	for i=1,#treeProgram do
+		context("boxit.l"..i.."(btex "..treeProgram[i].."  etex)((1,0.5,0.5),0.8);l"..i..".dy=4;")
+		if i == 1 then
+			context("l1.w = (-20bp,"..(#treeProgram*20).."bp);")
+		end
+		context("drawleftunboxed(l"..i..");")
+	end
+	argpos = 1
+	while arg[argpos] do  
+		context("fillboxed(l"..arg[argpos]..");")
+		argpos = argpos + 1
+	end 
+end
+
+
+--[[
+Sets the multiplication factor as given
+
+@param Factor the spacing factor to be set for spacing nodes
+--]]
+function setTreeMultiplicationFactor(Factor)
+	treeMultiplicationFactor = Factor
+end
+
+--[[
+Sets the tree scale
+
+@param Scale the scale factor to be used for drawing the tree
+--]]
+function setTreeScale(Scale)
+	treeScale = Scale
+	setScale(treeScale)
+end
+
+--[[
+Set the node radius of nodes in the tree
+
+@param Radius the radius to be set for the nodes
+--]]
+function setTreeRadius(Radius)
+	treeRadius = Radius
+end
+
+--[[
+Fixes the height of bounding box
+
+@param Height height that has to be set for the bounding box
+--]]
+function fixTreeHeight(Height)
+	if Height then
+		totTreeDepth=Height
+		treeHeight=Height
+		if treeHeight > treeThreshold then
+			treeHeightdraw=(Height+1)*8
+			if treeHeight>=7 and treeHeight<12 then
+				setTreeScale(2.5)
+				treeMultiplicationFactor=9
+			elseif treeHeight>=12 then
+				setTreeScale(1.5)
+				treeMultiplicationFactor=13
+			end
+		else
+			treeHeightdraw = (Height+1)*30
+		end
+	end
+end
+
+--[[
+loads the default values set for various tree attributes
+--]]
+function loadTreeDefaults()
+	treedx=6
+	treedy=5.0
+	treeScale=7
+	treeRadius=1
+	treeTextSize=0.8
+	treeHeight = 10
+	treeHeightdraw=10
+	treeThreshold = 6
+	treeMultiplicationFactor = 2
+	scale = treeScale
+	loadTreeColorDefaults()
+end
+
+--[[
+loads the default color set for the tree
+--]]
+function loadTreeColorDefaults()
+	treeLabelColor="black"
+	treeNodeColor=color6
+end
+
+--[[
+draw a single node of the tree
+
+
+@param x x co-ordinate of the center point
+@param y y co-ordinate of the center point
+@param num the label that has to be written inside the circle
+@param nodeColor the fill color for the node(optional)
+@param labelColor the color the label(optional)
+@param radius the radius of the circle(optional)
+@param textSize size of the label(optional) in pp
+--]]
+function drawTreeNode(x,y,num,nodeColor,labelColor,radius,textSize)
+	if radius then
+		treeRadius = radius
+	end
+	if textSize then
+		treeTextSize = textSize
+	end
+	if labelColor then
+		treeLabelColor = labelColor
+	end
+	if nodeColor then
+		treeNodeColor = nodeColor
+	end
+	print(treeNodeColor)
+	if treeHeight <= treeThreshold then
+		drawNode(x,y,num,treeNodeColor,treeLabelColor,treeRadius,treeTextSize)
+	else
+		context("draw ("..(x*scale)..","..(y*scale)..") withpen pencircle scaled 3pt withcolor "..treeNodeColor..";")
+	end
+	loadTreeColorDefaults()
+end	
+
+--[[
+draws the tree
+
+@param node the root
+@param depth the depth of the tree
+@param first 1 or 0 - specifies whether the vertical line has to be drawn to maintain the height of the tree
+--]]
+function drawTree(node, depth)
+	if not node.parent then 
+		drawHeight(treeHeightdraw)
+	end
+	if node.parent then
+		treeSpaceOutFactor = 1	
+		--print("depth = "..totTreeDepth)
+		if totTreeDepth == 2 then 
+			treeSpaceOutFactor = 58.5			
+		end
+		if totTreeDepth == 3 then 
+			treeSpaceOutFactor = 19.5			
+		end
+		if totTreeDepth == 4 then 
+			treeSpaceOutFactor = 8.35			
+		end
+		if totTreeDepth == 5 then 
+			treeSpaceOutFactor = 3.875			
+		end
+		if treeHeight>=treeThreshold then
+			treedx=((depth) * treeMultiplicationFactor )/(math.pow(2,(node.level-1)))
+		else
+			print("tree space out factor "..treeSpaceOutFactor)
+			treedx = treeSpaceOutFactor*((math.pow(2, (depth-node.level)))/2)
+		end
+		if node.parent.left == node then		
+			node.X = node.parent.X-treedx
+			node.Y = node.parent.Y-treedy
+			if treeThreshold > treeHeight then
+				drawLine(node.X,node.Y,node.parent.X-(treeRadius/2),node.parent.Y-(treeRadius/2))
+			else
+				drawLine(node.X,node.Y,node.parent.X,node.parent.Y)
+			end
+		else
+			node.X = node.parent.X+treedx
+			node.Y = node.parent.Y-treedy
+			if treeThreshold >= treeHeight then
+				drawLine(node.X,node.Y,node.parent.X+(treeRadius/2),node.parent.Y-(treeRadius/2))
+			else
+				drawLine(node.X,node.Y,node.parent.X,node.parent.Y)
+			end
+		end
+	end
+	drawTreeNode(node.X,node.Y,node.key)
+
+	if node.left.key then
+		drawTree(node.left, depth)
+	end
+	if node.right.key then
+		drawTree(node.right, depth)
+	end
+end
+
+levelElem = 1
+prevDepth = 1
+
+--[[
+
+--]]
+function drawTreeWithArray(node, depth, first)
+	print("current depth : "..depth)
+	if first then 
+		drawHeight(treeHeightdraw)
+		levelElem = 1
+	end
+
+	levelElem = levelElem +1
+
+	if node.parent then
+		treeSpaceOutFactor = 1	
+		print("depth = "..totTreeDepth)
+		if totTreeDepth == 2 then 
+			treeSpaceOutFactor = 58.5			
+		end
+		if totTreeDepth == 3 then 
+			treeSpaceOutFactor = 19.5			
+		end
+		if totTreeDepth == 4 then 
+			treeSpaceOutFactor = 8.35			
+		end
+		if totTreeDepth == 5 then 
+			treeSpaceOutFactor = 3.875			
+		end
+
+		if treeHeight>treeThreshold then
+			treedx=((depth) * 7.5 )/(math.pow(2,(node.level-1)))
+		else
+			print("depth "..treeSpaceOutFactor)
+			treedx = treeSpaceOutFactor*((math.pow(2, (depth-node.level)))/2)
+		end
+
+		if node.parent.left == node then		
+			node.X = node.parent.X-treedx
+			node.Y = node.parent.Y-treedy
+			if treeThreshold > treeHeight then
+				drawLine(node.X,node.Y,node.parent.X-(treeRadius/2),node.parent.Y-(treeRadius/2))
+			else
+				drawLine(node.X,node.Y,node.parent.X,node.parent.Y)
+			end
+		else
+			node.X = node.parent.X+treedx
+			node.Y = node.parent.Y-treedy
+			if treeThreshold > treeHeight then
+				drawLine(node.X,node.Y,node.parent.X+(treeRadius/2),node.parent.Y-(treeRadius/2))
+			else
+				drawLine(node.X,node.Y,node.parent.X,node.parent.Y)
+			end
+		end
+	end
+
+	k={1,2,3,44,675,6}
+	color={"white","white","white","white","white","white"}
+	print("nodeX:"..node.X.."  nodeY : "..node.Y)	
+	drawArray(k,color,{},{},{},{},treeScale*node.X,treeScale*node.Y,""..node.level..levelElem)
+
+	if node.left.key then
+		drawTreeWithArray(node.left, depth)
+	end
+	if node.right.key then
+		drawTreeWithArray(node.right, depth)
+	end
+end
+
+\stopluacode

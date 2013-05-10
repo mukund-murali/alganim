@@ -1,0 +1,37 @@
+\input ../API/baseAPI
+\input ../Algorithms/listAlgos
+
+\starttext
+Deletion of nodes from a linked list 
+
+\definetyping[C][tab=3]
+\startC
+deleteListNodes({4,18},{1,2,3,4,5,6,54,3 ,1508,23,154,176,18})
+\stopC
+
+\startluacode
+--listInsertion({1,2,3,4,5,6,7,8})
+deleteListNodes({4,18},{1,2,3,4,5,6,54,3 ,1508,23,154,176,18})
+\stopluacode
+
+Sorting a linked list
+\startC
+sortList({22,13,23,42,23,15,46,57,65,32})
+\stopC
+
+\startluacode
+--reverseList({34,12,54,63,13,14,23,43,66})
+sortList({22,13,23,42,23,15,46,57,65,32})
+\stopluacode
+
+Finding nth Element from last 
+\definetyping[C][tab=3]
+\startC
+nthFromLastWrapper({22,13,23,42,53,63,23,13,24,23,53},3)
+\stopC
+
+\startluacode
+--reverseList({34,12,54,63,13,14,23,43,66})
+nthFromLastWrapper({22,13,23,42,53,63,23,13,24,23,53},3)
+\stopluacode
+\stoptext

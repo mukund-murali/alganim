@@ -1,0 +1,185 @@
+\input ../API/treeAPI
+\startluacode
+
+totTreeDepth = 1
+
+treeProgram = {"for j=1,n,1 do",
+"\\ \\ \\ \\ iMin = j",
+"\\ \\ \\ \\ for i = j+1,n,1 do",
+"\\ \\ \\ \\ \\ \\ \\ \\ if a[i] < a[iMin] then",
+"\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ iMin = i",
+"\\ \\ \\ \\ \\ \\ \\ \\ end",
+"\\ \\ \\ \\ end",
+"\\ \\ \\ \\ swap(j,iMin)",
+"end"
+}
+--First Pass
+
+function bstCreate1(a)
+	root = nil
+	elements={}
+	for i=1,#a do
+		elements[i]={}
+		elements[i].key=a[i]
+		elements[i].left={}
+		elements[i].right={}
+		elements[i].level=0
+		elements[i].parent=0
+		insert1(elements[i])
+	end
+	totTreeDepth = maxTreeHeight(root)
+	print("setting Total depth ".. totTreeDepth)
+end
+
+function insert1(value)
+	if not root then
+		root = value
+		root.X = 0
+		root.Y = 0
+		root.level = 1
+		root.parent = nil
+	else
+        	insertHelper1(root, value)
+	end
+end
+ 
+function insertHelper1(node, value)	
+	if(value.key < node.key) then
+		if not node.left.key then
+			value.level = node.level+1
+			value.parent = node
+			node.left = value
+		else
+			insertHelper1(node.left, value)
+		end
+	else
+		if not node.right.key then
+			value.level = node.level+1
+			value.parent = node
+			node.right = value
+		else
+			insertHelper1(node.right, value)
+		end
+	end
+end
+
+
+--Second Pass
+
+function bstCreate(a, frameRate)
+	bstCreate1(a)
+	elements = {}
+	root = nil
+	if frameRate then  
+		setupAnimation(frameRate)
+	end
+	startAnimation("yes","no")
+	loadTreeDefaults()
+	fixTreeHeight(totTreeDepth)
+	for i=1,#a do
+		elements[i]={}
+		elements[i].key=a[i]
+		elements[i].left={}
+		elements[i].right={}
+		elements[i].level=0
+		elements[i].parent=0
+		if i~=1 then
+			local depth = maxTreeHeight(root)
+			startFrame()
+			beginPicture()
+			drawTree(root, depth)
+			endPicture()
+			stopFrame()
+		end
+
+		insert(elements[i])
+
+		if i==1 then
+			local depth = maxTreeHeight(root)
+			startFrame()
+			beginPicture()
+			drawTree(root, depth)
+			endPicture()
+			stopFrame()
+		end
+	end
+	local depth = maxTreeHeight(root)
+	startFrame()
+	beginPicture()
+	drawTree(root, depth)
+	endPicture()
+	stopFrame()
+	stopAnimation()
+end
+
+function insert(value)
+	if not root then
+		root = value
+		root.X = 0
+		root.Y = 0
+		root.level = 1
+		root.parent = nil
+	else
+        	insertHelper(root, value)
+	end
+end
+ 
+function insertHelper(node, value)	
+	if i~=1 then
+		local depth = maxTreeHeight(root)
+		startFrame()
+		beginPicture()
+		drawTree(root, depth)
+		drawTreeNode(node.X,node.Y,node.key,"red")
+		endPicture()
+		stopFrame()
+	end
+	if(value.key < node.key) then
+		if not node.left.key then
+			if i~=1 then
+				local depth = maxTreeHeight(root)
+				startFrame()
+				beginPicture()
+				drawTree(root, depth)
+				drawTreeNode(node.X,node.Y,node.key,"blue")
+				endPicture()
+				stopFrame()
+			end
+			value.level = node.level+1
+			value.parent = node
+			node.left = value
+		else
+			insertHelper(node.left, value)
+		end
+	else
+		if not node.right.key then
+			if i~=1 then
+				local depth = maxTreeHeight(root)
+				startFrame()
+				beginPicture()
+				drawTree(root, depth)
+				drawTreeNode(node.X,node.Y,node.key,"blue")
+				endPicture()
+				stopFrame()
+			end
+			value.level = node.level+1
+			value.parent = node
+			node.right = value
+		else
+			insertHelper(node.right, value)
+		end
+	end
+end
+
+function maxTreeHeight(node) 
+	if not node.key then
+		return 0
+	end
+	local left_height = maxTreeHeight(node.left)
+	local right_height = maxTreeHeight(node.right)
+	if left_height > right_height then 
+		return (left_height + 1)
+	end
+	return (right_height + 1)
+end
+\stopluacode

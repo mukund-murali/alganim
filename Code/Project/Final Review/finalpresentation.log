@@ -1,0 +1,366 @@
+(finalpresentation.tex
+
+ConTeXt  ver: 2012.05.30 11:26 MKIV  fmt: 2013.2.14  int: english/english
+
+system          > cont-new.mkiv loaded
+(/usr/share/texmf/tex/context/base/cont-new.mkiv
+system          > beware: some patches loaded from cont-new.mkiv
+)
+system          > finalpresentation.top loaded
+
+system          > options > start used options
+
+used options    > % runtime options files (command line driven)
+used options    > \unprotect
+used options    > % feedback and basic job control
+used options    > % handy for special styles
+used options    > \startluacode
+used options    > document = document or { }
+used options    > document.arguments={
+used options    >  ["synctex"]=true,
+used options    > }
+used options    > document.files={
+used options    >  "finalpresentation.tex",
+used options    > }
+used options    > \stopluacode
+used options    > % process info
+used options    > \setupsystem[inputfile=finalpresentation.tex]
+used options    > \setupsystem[\c!n=2,\c!m=2]
+used options    > % modes
+used options    > % options (not that important)
+used options    > \startsetups *runtime:options
+used options    > \stopsetups
+used options    > % styles and modules
+used options    > \startsetups *runtime:modules
+used options    > \stopsetups
+used options    > % done
+used options    > \protect \endinput
+
+system          > options > stop used options
+
+(finalpresentation.top)
+fonts           > latin modern fonts are not preloaded
+languages       > language en is active
+(../API/baseAPI.tex
+resolvers       > modules > loaded: 'animation'
+interface       > macros > processed file '/usr/share/texmf/tex/context/third/animation/t-animation.mkvi', delta 133
+(/usr/share/texmf/tex/context/third/animation/t-animation.mkvi)) (../Algorithms/arrayAlgos.tex (../API/arrayAPI.tex)) (../Algorithms/treeAlgos.tex (../API/treeAPI.tex)) (../Algorithms/listAlgos.tex (../API/listAPI.tex)) (../Algorithms/graphAlgos.tex (../API/graphAPI.tex))
+resolvers       > modules > loaded: 'simpleslides'
+(/usr/share/texmf/tex/context/third/simpleslides/t-simpleslides.mkiv
+loading         > module simpleslides
+resolvers       > modules > loaded: 'default'
+(/usr/share/texmf/tex/context/third/simpleslides/simpleslides-f-default.tex
+simpleslides    > loading default font setup
+fonts           > bodyfont 17.0pt is defined (can better be done global)
+fonts           > preloading latin modern fonts (third stage)
+fonts           > typescripts > unknown: library 'loc'
+(/usr/share/texmf/tex/context/base/type-otf.mkiv)
+fonts           > bodyfont 14pt is defined (can better be done global)
+fonts           > bodyfont 16.8pt is defined (can better be done global)
+fonts           > bodyfont 13.44pt is defined (can better be done global)
+fonts           > bodyfont 15pt is defined (can better be done global)
+fonts           > bodyfont 18pt is defined (can better be done global)
+fonts           > bodyfont 16pt is defined (can better be done global)
+fonts           > bodyfont 19.2pt is defined (can better be done global)
+fonts           > bodyfont 15.36pt is defined (can better be done global)
+fonts           > bodyfont 20pt is defined (can better be done global)
+fonts           > bodyfont 24pt is defined (can better be done global)
+fonts           > bodyfont 25pt is defined (can better be done global)
+fonts           > bodyfont 30pt is defined (can better be done global)
+{/usr/share/texmf/fonts/map/dvips/lm/lm-math.map}{/usr/share/texmf/fonts/map/dvips/lm/lm-rm.map}{/usr/share/texmf/fonts/map/pdftex/context/mkiv-base.map}
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath9-Regular subfont 9 with name stmary10.afm at 557056 is skipped, not found
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath12-Regular subfont 9 with name stmary10.afm at 779875 is skipped, not found
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath10-Regular subfont 9 with name stmary10.afm at 1114112 is skipped, not found
+fonts           > fallback modern ss 17pt is loaded
+)
+resolvers       > modules > loaded: 'default'
+(/usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-default.tex
+simpleslides    > loading default style setup
+colors          > rgb color space is not supported
+colors          > cmyk color space is not supported
+interface       > namespaces > installing namespace 'simpleslidestitle' with settings ' type=module, name=simpleslidestitle, setup=list, style=yes, parent=simpleslidetitle, '
+interface       > namespaces > using namespace 'simpleslidestitle' for 'simpleslidestitle'
+interface       > namespaces > namespace 'simpleslidestitle' for 'simpleslidestitle' uses parent 'simpleslidetitle'
+interface       > namespaces > installing parameter handler for 'simpleslidestitle'
+interface       > namespaces > installing parameterhash handler for 'simpleslidestitle'
+interface       > namespaces > installing attribute handler for 'simpleslidestitle'
+interface       > namespaces > installing setup command for 'simpleslidestitle' (multiple)
+interface       > namespaces > installing namespace 'SlideTitle' with settings ' type=module, name=SlideTitle, command=yes, setup=list, style=yes, parent=SlideTitle, '
+interface       > namespaces > using namespace 'SlideTitle' for 'SlideTitle'
+interface       > namespaces > namespace 'SlideTitle' for 'SlideTitle' uses parent 'SlideTitle'
+interface       > namespaces > installing parameter handler for 'SlideTitle'
+interface       > namespaces > installing parameterhash handler for 'SlideTitle'
+interface       > namespaces > installing attribute handler for 'SlideTitle'
+interface       > namespaces > installing definition command for 'SlideTitle' (single)
+interface       > namespaces > installing setup command for 'SlideTitle' (multiple)
+)
+resolvers       > modules > loaded: 'simpleslides-s-Sunrise'
+(/usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-Sunrise.tex
+simpleslides    > loading Sunrise style
+system          > command \NormalHeight is already defined
+system          > command \NormalWidth is already defined
+system          > command \PictureFrameHeight is already defined
+system          > command \PictureFrameWidth is already defined
+))
+check           > missing or ungrouped '=' after '0.8' in line 19 (@@@@simpleslidestitle:)
+check           > missing or ungrouped '=' after '0)' in line 19 (@@@@simpleslidestitle:)
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath10-Regular subfont 9 with name stmary10.afm at 787742 is skipped, not found
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath10-Regular subfont 9 with name stmary10.afm at 1102834 is skipped, not found
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath10-Regular subfont 9 with name stmary10.afm at 1575485 is skipped, not found
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath5-Regular subfont 9 with name stmary10.afm at 327680 is skipped, not found
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath7-Regular subfont 9 with name stmary10.afm at 458752 is skipped, not found
+fonts           > defining > forced type afm of stmary10 not found
+fonts           > defining > font with asked name 'stmary10' is not found using lookup 'file'
+fonts           > virtual math > loading font LMMath10-Regular subfont 9 with name stmary10.afm at 655360 is skipped, not found
+metapost        > initializing instance 'metafun' using format 'metafun'
+metapost        > loading 'metafun': /usr/share/texmf/metapost/context/base/metafun.mpiv
+backend         > xmp > using file '/usr/share/texmf/tex/context/base/lpdf-pdx.xml'
+pages           > flushing realpage 1, userpage 1
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 2, userpage 2
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+ <IA.png>
+pages           > flushing realpage 3, userpage 3
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 4, userpage 4
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+ <UC.png>
+pages           > flushing realpage 5, userpage 5
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 6, userpage 6
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
+
+
+\hbox(0.0+0.0)x543.09451, direction TLT
+.\glue(\rightskip) 0.0
+
+pages           > flushing realpage 7, userpage 7
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+(/usr/share/texmf/tex/context/base/java-imp-fld.mkiv)
+interactions    > javascripts > loaded: library 'fld' <prevend.png> <prevbreak.png> <prev.png> <playpause.png> <next.png> <nextbreak.png> <endnext.png> <minus.png> <plus.png> <togglepause.png> <toggleskip.png>
+pages           > flushing realpage 8, userpage 8
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+
+Overfull \hbox (1.33067pt too wide) in paragraph at lines 1--6
+[][]   \3>modern-designsize-17pt-tt-tf-0--0 deleteListNodes({4,18},{1,2,3,4,5,6,54,3,158,23,54,76,18}) 
+
+\hbox(15.21683+5.9176)x543.09451, direction TLT
+.\whatsit
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(15.21683+5.9176)x0.0, direction TLT
+.\glue 8.925
+.\glue 8.925
+.\glue 8.925
+.etc.
+
+pages           > flushing realpage 9, userpage 9
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 10, userpage 10
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 11, userpage 11
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 12, userpage 12
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 13, userpage 13
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 14, userpage 14
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 15, userpage 15
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 16, userpage 16
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 17, userpage 17
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 18, userpage 18
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 19, userpage 19
+fonts           > bodyfont 24.0414pt is defined (can better be done global)
+pages           > flushing realpage 20, userpage 20
+ )</usr/share/texmf/fonts/opentype/public/lm/lmsans10-bold.otf></usr/share/texmf/fonts/opentype/public/lm/lmroman10-regular.otf>{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}</usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf></usr/share/texmf/fonts/opentype/public/lm/lmsans10-regular.otf></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb>
+
+system          > files > start used files
+
+used files      >    1: filename=finalpresentation.tex | foundname=finalpresentation.tex | usedmethod=direct
+used files      >    2: filename=cont-new.mkiv | filetype=tex | foundname=/usr/share/texmf/tex/context/base/cont-new.mkiv | usedmethod=database
+used files      >    3: filename=finalpresentation.top | foundname=finalpresentation.top | usedmethod=direct
+used files      >    4: filename=lang-us.lua | filetype=lua | foundname=/usr/share/texmf/tex/context/patterns/lang-us.lua | usedmethod=database
+used files      >    5: filename=../API/baseAPI | filetype=tex | foundname=../API/baseAPI.tex | usedmethod=filesystem
+used files      >    6: filename=t-animation.mkvi | filetype=tex | foundname=/usr/share/texmf/tex/context/third/animation/t-animation.mkvi | usedmethod=database
+used files      >    7: filename=t-animation.mkvi | filetype=tex | format=tex | foundname=/usr/share/texmf/tex/context/third/animation/t-animation.mkvi | usedmethod=database
+used files      >    8: filename=usr/share/texmf/tex/context/third/animation/t-animation.mkvi | foundname=/usr/share/texmf/tex/context/third/animation/t-animation.mkvi | usedmethod=qualified
+used files      >    9: filename=../Algorithms/arrayAlgos | foundname=../Algorithms/arrayAlgos.tex | usedmethod=qualified
+used files      >   10: filename=../API/arrayAPI | foundname=../API/arrayAPI.tex | usedmethod=qualified
+used files      >   11: filename=../Algorithms/treeAlgos | foundname=../Algorithms/treeAlgos.tex | usedmethod=qualified
+used files      >   12: filename=../API/treeAPI | foundname=../API/treeAPI.tex | usedmethod=qualified
+used files      >   13: filename=../Algorithms/listAlgos | foundname=../Algorithms/listAlgos.tex | usedmethod=qualified
+used files      >   14: filename=../API/listAPI | foundname=../API/listAPI.tex | usedmethod=qualified
+used files      >   15: filename=../Algorithms/graphAlgos | foundname=../Algorithms/graphAlgos.tex | usedmethod=qualified
+used files      >   16: filename=../API/graphAPI | foundname=../API/graphAPI.tex | usedmethod=qualified
+used files      >   17: filename=t-simpleslides.mkiv | filetype=tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/t-simpleslides.mkiv | usedmethod=database
+used files      >   18: filename=t-simpleslides.mkiv | filetype=tex | format=tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/t-simpleslides.mkiv | usedmethod=database
+used files      >   19: filename=usr/share/texmf/tex/context/third/simpleslides/t-simpleslides.mkiv | foundname=/usr/share/texmf/tex/context/third/simpleslides/t-simpleslides.mkiv | usedmethod=qualified
+used files      >   20: filename=simpleslides-f-default.tex | filetype=tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-f-default.tex | usedmethod=database
+used files      >   21: filename=simpleslides-f-default.tex | filetype=tex | format=tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-f-default.tex | usedmethod=database
+used files      >   22: filename=usr/share/texmf/tex/context/third/simpleslides/simpleslides-f-default.tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-f-default.tex | usedmethod=qualified
+used files      >   23: filename=type-otf.mkiv | filetype=tex | foundname=/usr/share/texmf/tex/context/base/type-otf.mkiv | usedmethod=database
+used files      >   24: filename=lm.lfg | filetype=tex | foundname=/usr/share/texmf/tex/context/fonts/lm.lfg | usedmethod=database
+used files      >   25: filename=lm-math.lfg | filetype=tex | foundname=/usr/share/texmf/tex/context/fonts/lm-math.lfg | usedmethod=database
+used files      >   26: filename=lm-math.map | filetype=map | format=map | foundname=/usr/share/texmf/fonts/map/dvips/lm/lm-math.map | usedmethod=database
+used files      >   27: filename=lm-rm.map | filetype=map | format=map | foundname=/usr/share/texmf/fonts/map/dvips/lm/lm-rm.map | usedmethod=database
+used files      >   28: filename=mkiv-base.map | filetype=map | format=map | foundname=/usr/share/texmf/fonts/map/pdftex/context/mkiv-base.map | usedmethod=database
+used files      >   29: filename=lmsans10-regular | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmsans10-regular.otf | usedmethod=database
+used files      >   30: filename=lmroman9-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman9-regular.otf | usedmethod=database
+used files      >   31: filename=rm-lmr9.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/rm-lmr9.tfm | usedmethod=database
+used files      >   32: filename=lmmi9.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmmi9.tfm | usedmethod=database
+used files      >   33: filename=lmsy9.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmsy9.tfm | usedmethod=database
+used files      >   34: filename=lmex10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmex10.tfm | usedmethod=database
+used files      >   35: filename=msam10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm | usedmethod=database
+used files      >   36: filename=msbm10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm | usedmethod=database
+used files      >   37: filename=lmroman9-bold.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman9-bold.otf | usedmethod=database
+used files      >   38: filename=lmmib10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmmib10.tfm | usedmethod=database
+used files      >   39: filename=lmsans9-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmsans9-regular.otf | usedmethod=database
+used files      >   40: filename=lmmono9-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmmono9-regular.otf | usedmethod=database
+used files      >   41: filename=eufm10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm | usedmethod=database
+used files      >   42: filename=eufb10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eufb10.tfm | usedmethod=database
+used files      >   43: filename=lmroman12-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman12-regular.otf | usedmethod=database
+used files      >   44: filename=rm-lmr12.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/rm-lmr12.tfm | usedmethod=database
+used files      >   45: filename=lmmi12.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmmi12.tfm | usedmethod=database
+used files      >   46: filename=lmsy10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmsy10.tfm | usedmethod=database
+used files      >   47: filename=lmroman12-bold.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman12-bold.otf | usedmethod=database
+used files      >   48: filename=lmsans12-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmsans12-regular.otf | usedmethod=database
+used files      >   49: filename=lmmono12-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmmono12-regular.otf | usedmethod=database
+used files      >   50: filename=lmroman10-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman10-regular.otf | usedmethod=database
+used files      >   51: filename=rm-lmr10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/rm-lmr10.tfm | usedmethod=database
+used files      >   52: filename=lmmi10.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmmi10.tfm | usedmethod=database
+used files      >   53: filename=lmroman10-bold.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman10-bold.otf | usedmethod=database
+used files      >   54: filename=lmsans10-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmsans10-regular.otf | usedmethod=database
+used files      >   55: filename=lmmono10-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf | usedmethod=database
+used files      >   56: filename=simpleslides-s-default.tex | filetype=tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-default.tex | usedmethod=database
+used files      >   57: filename=simpleslides-s-default.tex | filetype=tex | format=tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-default.tex | usedmethod=database
+used files      >   58: filename=usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-default.tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-default.tex | usedmethod=qualified
+used files      >   59: filename=simpleslides-s-Sunrise.tex | filetype=tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-Sunrise.tex | usedmethod=database
+used files      >   60: filename=simpleslides-s-Sunrise.tex | filetype=tex | format=tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-Sunrise.tex | usedmethod=database
+used files      >   61: filename=usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-Sunrise.tex | foundname=/usr/share/texmf/tex/context/third/simpleslides/simpleslides-s-Sunrise.tex | usedmethod=qualified
+used files      >   62: filename=lmroman5-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman5-regular.otf | usedmethod=database
+used files      >   63: filename=rm-lmr5.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/rm-lmr5.tfm | usedmethod=database
+used files      >   64: filename=lmmi5.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmmi5.tfm | usedmethod=database
+used files      >   65: filename=lmsy5.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmsy5.tfm | usedmethod=database
+used files      >   66: filename=msam5.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm | usedmethod=database
+used files      >   67: filename=msbm5.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm | usedmethod=database
+used files      >   68: filename=lmroman5-bold | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman5-bold.otf | usedmethod=database
+used files      >   69: filename=lmmib5.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmmib5.tfm | usedmethod=database
+used files      >   70: filename=lmsans8-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmsans8-regular.otf | usedmethod=database
+used files      >   71: filename=lmmono8-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmmono8-regular.otf | usedmethod=database
+used files      >   72: filename=eufm5.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm5.tfm | usedmethod=database
+used files      >   73: filename=lmroman7-regular.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman7-regular.otf | usedmethod=database
+used files      >   74: filename=rm-lmr7.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/rm-lmr7.tfm | usedmethod=database
+used files      >   75: filename=lmmi7.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmmi7.tfm | usedmethod=database
+used files      >   76: filename=lmsy7.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmsy7.tfm | usedmethod=database
+used files      >   77: filename=msam7.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm | usedmethod=database
+used files      >   78: filename=msbm7.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm | usedmethod=database
+used files      >   79: filename=lmroman7-bold.otf | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmroman7-bold.otf | usedmethod=database
+used files      >   80: filename=lmmib7.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/lmmib7.tfm | usedmethod=database
+used files      >   81: filename=eufm7.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm | usedmethod=database
+used files      >   82: filename=eufb7.tfm | filetype=tfm | format=tfm | foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eufb7.tfm | usedmethod=database
+used files      >   83: filename=metafun.mpiv | filetype=mp | foundname=/usr/share/texmf/metapost/context/base/metafun.mpiv | usedmethod=database
+used files      >   84: filename=mp-base.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-base.mpiv | usedmethod=database
+used files      >   85: filename=mp-tool.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-tool.mpiv | usedmethod=database
+used files      >   86: filename=mp-mlib.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-mlib.mpiv | usedmethod=database
+used files      >   87: filename=mp-page.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-page.mpiv | usedmethod=database
+used files      >   88: filename=mp-butt.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-butt.mpiv | usedmethod=database
+used files      >   89: filename=mp-shap.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-shap.mpiv | usedmethod=database
+used files      >   90: filename=mp-grph.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-grph.mpiv | usedmethod=database
+used files      >   91: filename=mp-grid.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-grid.mpiv | usedmethod=database
+used files      >   92: filename=mp-form.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-form.mpiv | usedmethod=database
+used files      >   93: filename=mp-figs.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-figs.mpiv | usedmethod=database
+used files      >   94: filename=mp-func.mpiv | filetype=mp | format=mp | foundname=/usr/share/texmf/metapost/context/base/mp-func.mpiv | usedmethod=database
+used files      >   95: filename=lpdf-pdx.xml | filetype=tex | foundname=/usr/share/texmf/tex/context/base/lpdf-pdx.xml | usedmethod=database
+used files      >   96: filename=IA.png | format=tex | foundname=IA.png | usedmethod=direct
+used files      >   97: filename=UC.png | format=tex | foundname=UC.png | usedmethod=direct
+used files      >   98: filename=lmmono10-regular | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf | usedmethod=database
+used files      >   99: filename=java-imp-fld.mkiv | filetype=tex | foundname=/usr/share/texmf/tex/context/base/java-imp-fld.mkiv | usedmethod=database
+used files      >  100: filename=rm-lmtt10 | filetype=tfm | format=tfm | foundname=/usr/share/texmf/fonts/tfm/public/lm/rm-lmtt10.tfm | usedmethod=database
+used files      >  101: filename=prevend.png | format=tex | foundname=prevend.png | usedmethod=direct
+used files      >  102: filename=prevbreak.png | format=tex | foundname=prevbreak.png | usedmethod=direct
+used files      >  103: filename=prev.png | format=tex | foundname=prev.png | usedmethod=direct
+used files      >  104: filename=playpause.png | format=tex | foundname=playpause.png | usedmethod=direct
+used files      >  105: filename=next.png | format=tex | foundname=next.png | usedmethod=direct
+used files      >  106: filename=nextbreak.png | format=tex | foundname=nextbreak.png | usedmethod=direct
+used files      >  107: filename=endnext.png | format=tex | foundname=endnext.png | usedmethod=direct
+used files      >  108: filename=minus.png | format=tex | foundname=minus.png | usedmethod=direct
+used files      >  109: filename=plus.png | format=tex | foundname=plus.png | usedmethod=direct
+used files      >  110: filename=togglepause.png | format=tex | foundname=togglepause.png | usedmethod=direct
+used files      >  111: filename=toggleskip.png | format=tex | foundname=toggleskip.png | usedmethod=direct
+used files      >  112: filename=lmsans10-bold | filetype=otf | format=otf | foundname=/usr/share/texmf/fonts/opentype/public/lm/lmsans10-bold.otf | usedmethod=database
+used files      >  113: filename=lm-mathit.enc | filetype=enc | format=enc | foundname=/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc | usedmethod=database
+used files      >  114: filename=lm-mathsy.enc | filetype=enc | format=enc | foundname=/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc | usedmethod=database
+used files      >  115: filename=lm-rmtt.enc | filetype=enc | format=enc | foundname=/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc | usedmethod=database
+used files      >  116: filename=lmmi10.pfb | filetype=pfb | format=pfb | foundname=/usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb | usedmethod=database
+used files      >  117: filename=lmsy10.pfb | filetype=pfb | format=pfb | foundname=/usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb | usedmethod=database
+used files      >  118: filename=lmtt10.pfb | filetype=pfb | format=pfb | foundname=/usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb | usedmethod=database
+
+system          > files > stop used files
+
+
+system          > structure > start used structure
+
+used structure  > text: finalpresentation
+
+system          > structure > stop used structure
+
+
+mkiv lua stats  > used config file          - selfautodir:/share/texmf/web2c/texmfcnf.lua
+mkiv lua stats  > used cache path           - readable: '/var/lib/texmf/luatex-cache/context/f919750633122078d706dd10f1cfd39b' (order 1)
+mkiv lua stats  > used cache path           - readable: '/home/mukund/.texmf-var/luatex-cache/context/f919750633122078d706dd10f1cfd39b' (order 2)
+mkiv lua stats  > used cache path           - writable: '/home/mukund/.texmf-var/luatex-cache/context/f919750633122078d706dd10f1cfd39b'
+mkiv lua stats  > synctex tracing           - synctex has been enabled (extra log file generated)
+mkiv lua stats  > resource resolver         - loadtime 0.019 seconds, 3 scans with scantime 0.007 seconds, 478 shared scans, 118 found files, scanned paths: /etc/texmf /home/mukund/.texmf-var /home/mukund/texmf
+mkiv lua stats  > stored bytecode data      - 303 modules, 65 tables, 368 chunks
+mkiv lua stats  > cleaned up reserved nodes - 47 nodes, 10 lists of 443
+mkiv lua stats  > node memory usage         - 2 glue, 3 penalty, 9 attribute, 181 glue_spec, 3 attribute_list
+mkiv lua stats  > node list callback tasks  - 6 unique task lists, 6 instances (re)created, 94576 calls
+mkiv lua stats  > h-node processing time    - 0.274 seconds including kernel
+mkiv lua stats  > attribute processing time - 1.073 seconds front- and backend
+mkiv lua stats  > used backend              - pdf (backend for directly generating pdf output)
+mkiv lua stats  > loaded tex modules        - 5 requested, 5 found (*-animation *-simpleslides *-simpleslides-s-Sunrise simpleslides-f-default simpleslides-s-default), 0 missing
+mkiv lua stats  > loaded patterns           - en::2
+mkiv lua stats  > jobdata time              - 0.002 seconds saving, 0.001 seconds loading
+mkiv lua stats  > callbacks                 - 372738 direct, 5716 indirect, 378454 total
+mkiv lua stats  > randomizer                - resumed with value 0.54030669738553
+mkiv lua stats  > lxml preparation time     - 0.000 seconds, 0 nodes, 15 lpath calls, 0 cached calls
+mkiv lua stats  > interactive elements      - 40 references, 0 destinations
+mkiv lua stats  > v-node processing time    - 0.671 seconds 
+mkiv lua stats  > result saved in file      - finalpresentation.pdf
+mkiv lua stats  > loaded fonts              - 49 files: eufb10.tfm eufb7.tfm eufm10.tfm eufm5.tfm eufm7.tfm msam10.tfm msam5.tfm msam7.tfm msbm10.tfm msbm5.tfm msbm7.tfm lmmono10-regular.otf lmmono12-regular.otf lmmono8-regular.otf lmmono9-regular.otf lmroman10-bold.otf lmroman10-regular.otf lmroman12-bold.otf lmroman12-regular.otf lmroman5-bold.otf lmroman5-regular.otf lmroman7-bold.otf lmroman7-regular.otf lmroman9-bold.otf lmroman9-regular.otf lmsans10-bold.otf lmsans10-regular.otf lmsans12-regular.otf lmsans8-regular.otf lmsans9-regular.otf lmex10.tfm lmmi10.tfm lmmi12.tfm lmmi5.tfm lmmi7.tfm lmmi9.tfm lmmib10.tfm lmmib5.tfm lmmib7.tfm lmsy10.tfm lmsy5.tfm lmsy7.tfm lmsy9.tfm rm-lmr10.tfm rm-lmr12.tfm rm-lmr5.tfm rm-lmr7.tfm rm-lmr9.tfm rm-lmtt10.tfm
+mkiv lua stats  > fonts load time           - 6.205 seconds 
+mkiv lua stats  > metapost processing time  - 17.481 seconds, loading: 0.021 seconds, execution: 12.324 seconds, n: 156
+mkiv lua stats  > graphics processing time  - 0.027 seconds including tex, 42 processed images
+mkiv lua stats  > page group warning        - transparencies are used but no pagecolormodel is set
+mkiv lua stats  > pdf annotations           - 40 embedded, 40 unique
+mkiv lua stats  > luatex banner             - this is luatex, version beta-0.70.2-2012062323 (tex live 2012/debian)
+mkiv lua stats  > control sequences         - 38395 of 65536 + 100000
+mkiv lua stats  > current memory usage      - 69 MB (ctx: 71 MB)
+mkiv lua stats  > runtime                   - 47.150 seconds, 19 processed pages, 20 shipped pages, 0.424 pages/second
+

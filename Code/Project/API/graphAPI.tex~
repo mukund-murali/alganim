@@ -1,0 +1,366 @@
+
+\startluacode
+nodeCount = 1
+edgeCount = 1
+Graph = {}
+Graph.nodes = {}
+Graph.edges = {}
+math.randomseed(os.time())
+graphScale=20
+radius=0.45
+function Graph.printEdges()
+	for i, edge in ipairs(Graph.edges) do
+		fromNode = Graph.getNode(edge:getFromNodeName())
+		toNode = Graph.getNode(edge:getToNodeName())
+		context("draw ("..(graphScale*fromNode.vertex[1])..","..(graphScale*fromNode.vertex[2])..")-- ("..(graphScale*toNode.vertex[1])..","..(graphScale*toNode.vertex[2])..");")
+	end
+end
+function Graph.drawColouredEdge(node1,node2)
+	for i, edge in ipairs(Graph.edges) do
+		fromNode = Graph.getNode(edge:getFromNodeName())
+		toNode = Graph.getNode(edge:getToNodeName())
+		if (fromNode==Graph.nodes[node1] and toNode==Graph.nodes[node2]) or (fromNode==Graph.nodes[node2] and toNode==Graph.nodes[node1]) then
+			context("draw ("..(graphScale*fromNode.vertex[1])..","..(graphScale*fromNode.vertex[2])..")-- ("..(graphScale*toNode.vertex[1])..","..(graphScale*toNode.vertex[2])..")withpen pencircle scaled 2pt withcolor blue;")
+		end
+	end
+end
+function Graph.drawColouredEdge2(node1,node2,color)
+	for i, edge in ipairs(Graph.edges) do
+		fromNode = Graph.getNode(edge:getFromNodeName())
+		toNode = Graph.getNode(edge:getToNodeName())
+		if (fromNode==Graph.nodes[node1] and toNode==Graph.nodes[node2]) or (fromNode==Graph.nodes[node2] and toNode==Graph.nodes[node1]) then
+			context("draw ("..(graphScale*fromNode.vertex[1])..","..(graphScale*fromNode.vertex[2])..")-- ("..(graphScale*toNode.vertex[1])..","..(graphScale*toNode.vertex[2])..")withpen pencircle scaled 2pt withcolor (1,0.5,0.5);")
+		end
+	end
+end
+function Graph.printNodes()
+	for i, node in ipairs(Graph.nodes) do
+		print(node.name.."->("..(node.vertex[1])..","..(node.vertex[2])..")")
+				
+		context("drawfill ("..((node.vertex[1]-radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]+radius)*graphScale)..") .. ("..((node.vertex[1]+radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]-radius)*graphScale)..")..cycle withcolor white;")
+		
+		context("draw ("..((node.vertex[1]-radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]+radius)*graphScale)..") .. ("..((node.vertex[1]+radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]-radius)*graphScale)..")..cycle ;")
+	end
+
+end
+
+function Graph.drawColouredNodes()
+	for i, node in ipairs(Graph.nodes) do
+		print(node.name.."->("..(node.vertex[1])..","..(node.vertex[2])..")")
+				
+		context("drawfill ("..((node.vertex[1]-radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]+radius)*graphScale)..") .. ("..((node.vertex[1]+radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]-radius)*graphScale)..")..cycle withcolor blue;")
+		
+		context("draw ("..((node.vertex[1]-radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]+radius)*graphScale)..") .. ("..((node.vertex[1]+radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]-radius)*graphScale)..")..cycle ;")
+	end
+
+end
+function Graph.drawStartNode(start)
+	for i, node in ipairs(Graph.nodes) do
+		if i==start then
+				
+			context("drawfill ("..((node.vertex[1]-radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]+radius)*graphScale)..") .. ("..((node.vertex[1]+radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]-radius)*graphScale)..")..cycle withcolor red;")
+		
+			context("draw ("..((node.vertex[1]-radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]+radius)*graphScale)..") .. ("..((node.vertex[1]+radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]-radius)*graphScale)..")..cycle ;")
+		end
+	end
+
+end
+function Graph.drawStopNode(stop)
+	for i, node in ipairs(Graph.nodes) do
+		if i==stop then
+				
+			context("drawfill ("..((node.vertex[1]-radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]+radius)*graphScale)..") .. ("..((node.vertex[1]+radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]-radius)*graphScale)..")..cycle withcolor green;")
+		
+			context("draw ("..((node.vertex[1]-radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]+radius)*graphScale)..") .. ("..((node.vertex[1]+radius)*graphScale)..","..(node.vertex[2]*graphScale)..") .. ("..(node.vertex[1]*graphScale)..","..((node.vertex[2]-radius)*graphScale)..")..cycle ;")
+		end
+	end
+
+end
+function Graph.printNodeLabels()
+	context("defaultscale := 0.8;")
+	for i, node in ipairs(Graph.nodes) do
+			context("label(\""..node.name.."\", ("..(node.vertex[1]*graphScale)..","..(node.vertex[2]*graphScale).."));")
+	end
+end
+function findSlope(v1,v2)
+	if (v2[1]-v1[1]) == 0 then
+		return 99
+	else
+		return (v2[2]-v1[2])  / (v2[1]-v1[1])
+	end
+end
+function Graph.printEdgeLabels()
+	context("defaultscale := 0.5;")
+	for i, edge in ipairs(Graph.edges) do
+		if edge.flag==0 then
+			fromNode = Graph.getNode(edge:getFromNodeName())
+			toNode = Graph.getNode(edge:getToNodeName())
+			local m=findSlope(fromNode.vertex,toNode.vertex)
+			if m>= 0 then
+				if m<math.tan(22.5) then
+					if fromNode.vertex[1] < toNode.vertex[1] then
+						context("label.bot(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					else
+						context("label.top(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					end
+				elseif m<1 then
+					if fromNode.vertex[1] < toNode.vertex[1] then
+						context("label.ulft(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					else
+						context("label.lrt(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					end
+				elseif m<math.tan(67.5) then
+					if fromNode.vertex[1] < toNode.vertex[1] then
+						context("label.ulft(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					else
+						context("label.lrt(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					end
+				else
+					if fromNode.vertex[2] < toNode.vertex[2] then
+						context("label.rt(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					else
+						context("label.lft(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					end
+				end
+			else
+				if m > -(math.tan(22.5)) then
+					if fromNode.vertex[1] > toNode.vertex[1] then
+						context("label.top(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					else
+						context("label.bot(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					end
+				elseif m > -1 then
+					if fromNode.vertex[1] > toNode.vertex[1] then
+						context("label.urt(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					else
+						context("label.llft(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					end
+				elseif m > -(math.tan(67.5)) then
+					if fromNode.vertex[1] > toNode.vertex[1] then
+						context("label.urt(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					else
+						context("label.llft(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					end
+				else
+					if fromNode.vertex[2] > toNode.vertex[2] then
+						context("label.rt(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					else
+						context("label.lft(\""..edge.length.."\",0.5[("..(fromNode.vertex[1]*graphScale)..","..(fromNode.vertex[2]*graphScale).."),("..(toNode.vertex[1]*graphScale)..","..(toNode.vertex[2]*graphScale)..")]);")
+					end
+				end
+			end
+			--context("draw ("..(graphScale*fromNode.vertex[1])..","..(graphScale*fromNode.vertex[2])..")-- ("..(graphScale*toNode.vertex[1])..","..(graphScale*toNode.vertex[2])..");")
+		end
+	end
+end
+function Graph.isNode(nodeName)
+	for i, node in ipairs(Graph.nodes) do
+		if node.name == nodeName then 
+			return true 
+		end
+	end
+	return false
+end
+
+function Graph.getNode(nodeName)
+	for i, node in ipairs(Graph.nodes) do
+		if node.name == nodeName then
+			return node
+		end
+	end	
+	return nil
+end
+
+function Graph.addNode(node)
+	Graph.nodes[nodeCount] = node
+	nodeCount = nodeCount + 1
+end
+
+function Graph.addEdge(edge)
+	for i, eachEdge in ipairs(Graph.getNode(edge:getToNodeName()).edges) do
+		if eachEdge:getToNodeName()==edge:getFromNodeName() then
+			edge.flag=1
+			break
+		end
+	end
+	if Graph.isNode(edge:getFromNodeName())  and Graph.isNode(edge:getToNodeName()) and edge:getFromNodeName()~=edge:getToNodeName() then
+		Graph.edges[edgeCount] = edge
+		table.insert(Graph.getNode(edge:getFromNodeName()).edges,edge)
+		edgeCount = edgeCount + 1
+	end
+end
+
+
+Nodes = {}
+Nodes.__index = Nodes
+function Nodes.create(name, vertex)
+	local newNode = {}
+	setmetatable(newNode, Nodes)	
+	newNode.name = name
+	newNode.vertex = vertex or {10.0 * (math.random() - 0.5), 10.0 * (math.random() - 0.5)}
+	newNode.edges = {}
+	newNode.velocity = {0,0}
+	newNode.acceleration = {0,0}
+	return newNode
+end
+
+Edges = {}
+Edges.__index = Edges
+function Edges.create(fromNode, toNode, length)
+	local newEdge = {}
+	setmetatable(newEdge, Edges)	
+	newEdge.fromNode = fromNode
+	newEdge.toNode = toNode
+	newEdge.length = length or 1
+	newEdge.flag=0
+	return newEdge
+end
+
+function Edges:getFromNodeName()
+	return self.fromNode
+end
+function Edges:getToNodeName()
+	return self.toNode
+end
+
+function length(pair)
+	return math.sqrt(pair[1]^2+pair[2]^2)
+end
+
+function ForceDirectedGraph(args,graph)
+	-- local nodes = nodes or self.nodes
+	local function applyForce(node1,force)
+		node1.acceleration[1]=node1.acceleration[1]+force[1]
+		node1.acceleration[2]=node1.acceleration[2]+force[2]
+	end
+	local function Coulomb_repulsion()
+		for _, node1 in ipairs(graph.nodes) do
+				--iterate through every other node and sum forces
+			for _, node2 in ipairs(graph.nodes) do
+				if(node1.name ~= node2.name) then
+					local lenVec = {}
+					lenVec[1]=node1.vertex[1]-node2.vertex[1]
+					lenVec[2]=node1.vertex[2]-node2.vertex[2]
+					local len = length(lenVec)+0.1
+					local normVec = {}
+					normVec[1]=lenVec[1] * (1/len)
+					normVec[2]=lenVec[2] * (1/len)
+					local force = {}
+					force[1]=(normVec[1]*args.repulsion)/(math.pow(len,2)*0.5)
+					force[2]=(normVec[2]*args.repulsion)/(math.pow(len,2)*0.5)
+					applyForce(node1,force)
+					force[1]=(normVec[1]*args.repulsion)/(math.pow(len,2)*-0.5)
+					force[2]=(normVec[2]*args.repulsion)/(math.pow(len,2)*-0.5)
+					applyForce(node2,force)
+				end
+			end
+		end
+	end
+
+	local function Hooks_attraction(k)
+		k = k or 1
+		for _, eachEdge in ipairs(graph.edges) do
+			local node1=Graph.getNode(eachEdge:getFromNodeName())
+			local node2=Graph.getNode(eachEdge:getToNodeName())
+			local vec1=node1.vertex
+			local vec2=node2.vertex
+			local lenVec = {}
+			lenVec[1]=vec2[1]-vec1[1]
+			lenVec[2]=vec2[2]-vec1[2]
+			local len = length(lenVec)
+			local displacement = eachEdge.length - len
+			local normVec = {}
+			normVec[1]=lenVec[1] * (1/len)
+			normVec[2]=lenVec[2] * (1/len)
+			local force = {}
+			force[1]=normVec[1]*k*displacement*-0.5
+			force[2]=normVec[2]*k*displacement*-0.5
+			applyForce(node1,force)
+			force[1]=normVec[1]*k*displacement*0.5
+			force[2]=normVec[2]*k*displacement*0.5
+			applyForce(node2,force)
+		end
+	end
+
+	local function Attract_to_centre()
+		for _, eachNode in ipairs(graph.nodes) do
+			local force = {}
+			force[1]=(eachNode.vertex[1]*-1.0)*(args.repulsion/50.0)
+			force[2]=(eachNode.vertex[2]*-1.0)*(args.repulsion/50.0)
+			applyForce(eachNode,force)
+		end
+	end
+
+	local function Update_velocity(timestep)
+		for _, eachNode in ipairs(graph.nodes) do
+			eachNode.velocity[1]=(eachNode.velocity[1]+(eachNode.acceleration[1]*timestep))*args.damping
+			eachNode.velocity[2]=(eachNode.velocity[2]+(eachNode.acceleration[2]*timestep))*args.damping
+			eachNode.acceleration = {0,0}
+		end
+	end
+	local function Update_position(timestep)
+		for _, eachNode in ipairs(graph.nodes) do
+			eachNode.vertex[1]=eachNode.vertex[1]+(eachNode.velocity[1]*timestep)
+			eachNode.vertex[2]=eachNode.vertex[2]+(eachNode.velocity[2]*timestep)
+		end
+	end
+
+	local function Total_energy()
+		local energy = 0.0
+		for _, eachNode in ipairs(graph.nodes) do
+			local speed=length(eachNode.velocity)
+			energy = energy+(0.5*speed*speed)
+		end
+		return energy
+	end
+	--setting up local vars to be used later 
+
+	args.repulsion = args.repulsion or 400.0
+	args.desiredEdgeLength = args.desiredEdgeLength or 1
+	args.stiffness = args.stiffness or 400.0
+	args.coulomb = args.coulomb or true
+	args.hooks = args.hooks or true
+	args.small_num = args.small_num or 1
+	args.damping = args.damping or .50
+	
+	local total_kinetic_energy = 0
+	local timestep = 0.03
+
+	print("Force Directed Graph Layout Algorithm: Started")
+	repeat
+	--for i=1,10 do
+		Coulomb_repulsion()
+		Hooks_attraction(args.stiffness)
+		Attract_to_centre()
+		Update_velocity(timestep)
+		Update_position(timestep)
+	until Total_energy() < 0.01
+	--end
+	print("Force Directed Graph Layout Algorithm: Complete")
+	return true
+end
+function createGraphFromMatrix(a)
+	local vertices={}
+	local k=1
+	local edge={}
+	for i=1,#a do
+		vertices[i]=Nodes.create("v"..i)
+		Graph.addNode(vertices[i])
+	end
+	for i=1,#a do
+		for j=1,#a[i] do
+			if a[i][j] > 0 then
+				edge[k]=Edges.create(vertices[i].name,vertices[j].name,a[i][j])
+				Graph.addEdge(edge[k])
+				k=k+1
+			end
+		end
+	end
+
+	ForceDirectedGraph({},Graph)
+end
+
+
+
+\stopluacode
+

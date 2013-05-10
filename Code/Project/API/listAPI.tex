@@ -1,0 +1,203 @@
+
+
+\startluacode
+
+-- Default Values
+listScale=7
+listTextSize = 0.8
+listRadius = 1
+curPosX = 1
+curPosY = 1
+listFirstNode = "1"
+listLabelColor = "black"
+listNodeColor = "yellow"
+nodeCount = 1
+
+listProgram = {}
+prevNodeColor = "green"
+
+--Methods
+function showListPseudoCode(...)	
+	--[[			
+	context("boxjoin(a.sw=b.nw;);")
+	for i=1,#listProgram do
+		context("boxit.l"..i.."(btex "..listProgram[i].."  etex)((1,0.5,0.5),0.8);l"..i..".dy=4;")
+		if i == 1 then
+			context("l1.w = (0,"..(#listProgram*20).."bp);")
+		end
+		context("drawleftunboxed(l"..i..");")
+	end
+	argpos = 1
+	while arg[argpos] do  
+		context("fillboxed(l"..arg[argpos]..");")
+		argpos = argpos + 1
+	end 
+	--]]
+end
+
+
+function loadListDefaults()
+	listScale=7
+	listTextSize = 0.8
+	curPosX = 1
+	curPosY = 1
+	listFirstNode = "1"
+	loadListColorDefaults()
+end
+
+function loadListColorDefaults()
+	listLabelColor = "black"
+	listNodeColor = "yellow"
+end
+
+function setTextSize(passedTextSize)
+	listTextSize = passedTextSize
+end
+
+function noOfDigits(number)
+	cnt = 0
+	while number~=0 do
+		number = math.modf(number/10)
+		cnt = cnt + 1 
+	end
+	return cnt
+end
+
+function newList()
+	listFirstNode = "1"
+	nodeCount = 1
+	curPosX = 1
+	curPosY = 1	
+end
+
+function drawListNode(node,level,lColor,passedRadius, passedTextSize)
+	if radius then
+		listRadius = passedRadius
+	end
+	if passedTextSize then
+		listTextSize = passedTextSize
+	end
+	if lColor then
+		listLabelColor = lColor
+	end
+	if node.color then
+		listNodeColor = nColor
+	end
+
+	if not level then
+		level = 10
+	end
+
+	x = curPosX
+	y = curPosY*level
+
+	node.x = x
+	node.y = y
+	if drawType == 1 then	
+		drawRectangularNode(node,level,listLabelColor,listRadius,listTextSize)
+	else
+		drawCircularNode(node,level,listLabelColor,listRadius,listTextSize)
+	end
+
+	curPosX = x + 3
+	loadListColorDefaults()
+end
+
+function drawCircularNode(node,level,labelColor,radius,textSize)
+	local x = node.x
+	local y = node.y
+	local num = node.key
+	local nodeColor = node.color
+
+	NOD = noOfDigits(num)
+	if NOD > 2 then
+		listScale = (2.5/NOD)
+	elseif  NOD > 1 then
+		listScale = (1.5/NOD)
+	else
+		listScale = 1
+	end
+	context("circleit.lc"..level..nodeCount.."(btex "..num.." etex)("..nodeColor..","..listScale..");")
+	context("lc"..level..nodeCount..".c=("..(x*10)..","..(y*10)..");")
+	context("drawboxed(lc"..level..nodeCount..");")
+	if nodeCount > 1 then 
+		if prevNodeColor == pink then
+			context("drawarrow lc"..level..(nodeCount-2)..".e ..{dir-75} lc"..level..(nodeCount)..".w ;")	
+		elseif nodeColor == pink then
+			pp = 1
+		else
+			context("drawarrow lc"..level..(nodeCount-1)..".e -- lc"..level..nodeCount..".w ;")
+		end
+	end
+	nodeCount = nodeCount + 1
+	prevNodeColor = nodeColor
+end
+
+pink = "(0.8,0.8,0.8)"
+listMultiplicationFactor = 13
+
+function drawRectangularNode(node,level,labelColor,radius,textSize)
+	local x = node.x
+	local y = node.y
+	local num = node.key
+	local nodeColor = node.color
+
+	NOD = noOfDigits(num)
+	if NOD > 2 then
+		listScale = (2.5/NOD)
+	elseif  NOD > 1 then
+		listScale = (1.5/NOD)
+	else
+		listScale = 0.7
+	end
+	context("boxjoin (a.se=b.sw; a.ne=b.nw);")
+	box1 = "lc"..level..nodeCount.."a"
+	box2 = "lc"..level..nodeCount.."b"
+	context("boxit."..box1.."(btex "..num.." etex)("..nodeColor..","..listScale..");")
+	context(box1..".dx=4;")
+	context("boxit."..box2.."()("..nodeColor..","..listScale..");")
+	context(box2..".dx=4;")
+	context(box1..".c=("..(x*listMultiplicationFactor)..","..(y*listMultiplicationFactor)..");")
+	context("drawboxed("..box1..","..box2..");")
+	context("draw "..box2..".c withpen pencircle scaled 2pt;")
+	if nodeCount > 1 then 
+		if prevNodeColor == pink then
+			--Curve drawing to skip intermediate node
+			context("draw lc"..level..(nodeCount-2).."b"..".c ..{dir+35} lc"..level..(nodeCount-1).."a"..".w -(5,0);")	
+			context("draw lc"..level..(nodeCount-1).."a"..".w -(5,0) ..{dir-85} lc"..level..(nodeCount-1).."b"..".e +(5,0) ;")	
+			context("drawarrow lc"..level..(nodeCount-1).."b"..".e +(5,0) ..{dir+35} lc"..level..(nodeCount).."a"..".w ;")	
+		elseif nodeColor == pink then
+			pp = 1
+		else
+			context("drawarrow lc"..level..(nodeCount-1).."b"..".c -- lc"..level..nodeCount.."a"..".w ;")
+		end
+	end
+	if node.current == 1 then
+		--context("pair destination ;destination := lc"..level..(nodeCount).."a"..".n + (-10,+10) ;drawarrow destination -- lc"..level..(nodeCount).."a"..".n withpen pencircle scaled .25mm withcolor .625 red ;");
+		context("pair destination ;destination := lc"..level..(nodeCount).."a"..".s + (0,-10) ;drawarrow destination -- lc"..level..(nodeCount).."a"..".s withpen pencircle scaled .25mm withcolor .625 red ;");
+	end
+	nodeCount = nodeCount + 1
+	prevNodeColor = nodeColor
+end
+drawType = 1
+
+function drawLinkedList(Head, level, type)
+	if type then 
+		drawType = type
+	else
+		drawType = 1
+	end
+
+	if not level then
+		level = 1
+	end
+	level = level * 1
+	newList()
+	local temp = Head
+	while temp.nxt do
+		drawListNode(temp, level)
+		temp = temp.nxt
+	end
+	drawListNode(temp,level)
+end
+\stopluacode

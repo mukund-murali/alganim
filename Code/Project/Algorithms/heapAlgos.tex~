@@ -1,0 +1,101 @@
+\input ../API/treeAPI
+\input ../API/baseAPI
+\startluacode
+totTreeDepth=1
+function maxTreeHeight(node) 
+	if not node.key then
+		return 0
+	end
+	left_height = maxTreeHeight(node.left)
+	right_height = maxTreeHeight(node.right)
+	if left_height > right_height then 
+		return left_height + 1 
+	else 
+		return (right_height + 1)
+	end
+end
+function heapCreate(a)
+	elements = {}
+	root = nil
+	for i=1,#a do
+		elements[i]={}
+		elements[i].key=a[i]
+		elements[i].left={}
+		elements[i].right={}
+		elements[i].level=0
+		elements[i].parent=0
+		insert(elements[i])
+		if i~=1 then
+			elements[i-1].nxt=elements[i]
+		end
+	end
+	local depth = maxTreeHeight(root)
+	startFrame()
+	beginPicture()
+	drawTree(root, depth, "1")
+	endPicture()
+	stopFrame()
+	stopAnimation()
+end
+
+function insert(value)
+	if not root then
+		root = value
+		root.X = 0
+		root.Y = 0
+		root.level = 1
+		root.parent = nil
+	else
+        	insertHelper(root, value)
+	end
+end
+function chkParent(tnode)
+	if tnode.parent then
+		if tnode.key > tnode.parent.key then
+			temp=tnode.key
+			tnode.key=tnode.parent.key
+			tnode.parent.key=temp
+		end
+		chkParent(tnode.parent)
+	end				
+end
+function insertHelper(node, value)	
+	if not node.left.key then
+		if node.key < value.key then
+			temp=node.key
+			node.key=value.key
+			value.key=temp
+			chkParent(node)
+		end
+		value.level = node.level+1
+		value.parent = node
+		node.left = value
+	elseif not node.right.key then
+		if node.key < value.key then
+			temp=node.key
+			node.key=value.key
+			value.key=temp
+			chkParent(node)
+		end
+		value.level = node.level+1
+		value.parent = node
+		node.right = value
+	else
+		insertHelper(node.nxt, value)
+	end
+end
+function display(root)
+	if root.key then
+		io.write(root.level.." "..root.key)
+		if root.parent then
+			io.write(" "..root.parent.key)
+		end
+		print()	
+		display(root.left)
+		display(root.right)
+	end
+end
+heapCreate({6,5,3,1,8,7,2,4})
+
+
+\stopluacode

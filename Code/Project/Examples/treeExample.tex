@@ -1,0 +1,38 @@
+\input ../API/baseAPI
+\input ../API/arrayAPI
+\input ../Algorithms/treeAlgos
+
+\starttext
+Creation of a Binary Search Tree
+
+\definetyping[C][tab=3]
+\startC
+Randomly generated 100 node Binary Search Tree
+\stopC
+
+\startluacode
+--bstCreate({300,200,400,150,250,350,450,125,175,325,375,425,475,413,437,436,118,137,225,117,480})
+--bstCreate({5,4,3,2,1,6})
+print("random : "..math.modf(math.random(200)))
+
+local elements = {}
+elements[1]=500
+for i=1, 100 do
+	elements[i+1] = math.modf(math.random(1000))
+end
+bstCreate(elements,100)
+\stopluacode
+
+Creation of a Binary Search Tree
+
+\definetyping[C][tab=3]
+\startC
+bstCreate({500,250,750,200,300,700,800,175,225,165,230,315,350,730,810})
+\stopC
+
+\startluacode
+bstCreate({500,250,750,200,300,700,800,175,225,165,230,315,350,730,810})
+\stopluacode
+
+
+\stoptext

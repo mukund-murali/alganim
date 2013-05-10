@@ -1,0 +1,301 @@
+\input ../API/listAPI
+\startluacode
+
+listProgram = {
+	"line 1",
+	"line 2",
+	"line 3",
+	"line4",
+	"line 2",
+	"line 3",
+	"line4"
+}
+
+function nthFromLast(head, n)
+	local temp = head
+	local first = head
+	local i = 0
+	while i < n do
+		temp.color = colorpink
+		first.color = "cyan"
+		startFrameAndPicture()
+		drawLinkedList(head, 1)
+		stopFrameAndPicture()
+		resetColors(head)
+		temp = temp.nxt
+		i = i+1
+	end
+	while temp.nxt do
+		print("in")
+		temp.color = colorpink
+		first.color = "cyan"
+		startFrameAndPicture()
+		drawLinkedList(head, 1)
+		stopFrameAndPicture()
+		resetColors(head)
+		first = first.nxt
+		temp = temp.nxt
+	end
+	temp.color = colorpink
+	first.color = "cyan"
+	startFrameAndPicture()
+	drawLinkedList(head, 1)
+	stopFrameAndPicture()
+end
+	
+function reverseLinkedList(head)
+	local newnode = nill
+	local temp = head
+	while temp.nxt do
+		print("new frame ") 
+		startFrameAndPicture()
+		showListPseudoCode(1)
+		drawLinkedList(temp.nxt, 1)
+
+		nextNode = temp.nxt
+		temp.nxt = newnode
+		newnode = temp
+		temp = nextNode
+
+		drawLinkedList(newnode, 2)
+		stopFrameAndPicture()
+	end
+	temp.nxt = newnode
+	return temp
+end
+
+
+function nthFromLastWrapper(nodes, n)
+	startAnimation("yes","no")
+	loadListDefaults()
+	head = createList(nodes)
+	startFrameAndPicture()
+	drawLinkedList(head, 1)
+	stopFrameAndPicture()
+	nthFromLast(head, n)
+	stopAnimation()
+end
+
+function reverseList(nodes)
+	startAnimation("yes","no")
+	loadListDefaults()
+	head = createList(nodes)
+
+	startFrameAndPicture()
+	drawLinkedList(head, 1)
+	stopFrameAndPicture()
+
+	head = reverseLinkedList(head)
+
+--	startFrameAndPicture()
+--	drawLinkedList(head, 1)
+--	stopFrameAndPicture()
+
+	stopAnimation()
+end
+
+function sortLinkedList(first)
+	list = first
+	while list.nxt do
+		pass = list.nxt
+		while pass do  
+			pass.color = colorpink
+			list.color="cyan"
+			startFrameAndPicture()
+			drawLinkedList(head, 1, 2)
+			stopFrameAndPicture()
+			resetColors(first)
+			if list.key > pass.key then
+				pass.color = color2
+				list.color=color1
+				startFrameAndPicture()
+				drawLinkedList(head, 1, 2)
+				stopFrameAndPicture()
+	   			temp = list.key
+				list.key = pass.key
+				pass.key = temp
+				pass.color = color1
+				list.color=color2
+				startFrameAndPicture()
+				drawLinkedList(head, 1, 2)
+				stopFrameAndPicture()
+				resetColors(first)
+			end
+			pass=pass.nxt
+		end
+		resetColors(first)
+		list = list.nxt
+	end
+	resetColors(first)
+end
+
+function sortList(nodes)
+	startAnimation("yes","no")
+	loadListDefaults()
+	head = createList(nodes)
+	startFrameAndPicture()
+	drawLinkedList(head,1,2)
+	stopFrameAndPicture()
+	sortLinkedList(head)
+	startFrameAndPicture()
+	drawLinkedList(head,1,2)
+	stopFrameAndPicture()
+	stopAnimation()
+end
+
+function resetColors(head)
+	local temp = head
+	while temp do
+		temp.color="yellow"
+		temp = temp.nxt
+	end
+end
+
+function resetPointers(head)
+	local temp = head
+	while temp do
+		temp.current = 0
+		temp = temp.nxt
+	end
+end
+
+function deleteNode(key, head)
+	resetColors(head)
+	local temp = head
+	if key == head.key then
+		head.color=colorlightgreen
+		startFrameAndPicture()
+		showListPseudoCode(1)
+		drawLinkedList(head)
+		stopFrameAndPicture()
+
+		head.color=color1
+		startFrameAndPicture()
+		showListPseudoCode(1)
+		drawLinkedList(head)
+		stopFrameAndPicture()
+
+		head.color=pink
+		startFrameAndPicture()
+		showListPseudoCode(1)
+		drawLinkedList(head)
+		stopFrameAndPicture()
+
+		head = head.nxt
+		resetColors(head)
+		return head
+	end
+	prev = head
+	while temp do
+		resetPointers(head)
+		temp.current = 1
+		temp.color=colorlightgreen
+		startFrameAndPicture()
+		showListPseudoCode(1)
+		drawLinkedList(head)
+		stopFrameAndPicture()
+
+		if temp.key == key then
+			temp.color=color1
+			startFrameAndPicture()
+			showListPseudoCode(1)
+			drawLinkedList(head)
+			stopFrameAndPicture()
+	
+			temp.color=pink
+			startFrameAndPicture()
+			showListPseudoCode(1)
+			drawLinkedList(head)
+			stopFrameAndPicture()
+
+			prev.nxt = temp.nxt
+			resetColors(head)
+			return head
+		end
+		prev = temp
+		temp = temp.nxt
+	end
+end
+pink = "(0.8,0.8,0.8)"
+function deleteListNodes(deleteKeys, nodes)	
+	listProgram = {"function deleteNode(key, head)",
+"\\ \\ \\ \\	local temp = head",
+"\\ \\ \\ \\	if key == head.key then",
+"\\ \\ \\ \\ \\ \\ \\ \\		head = head.nxt",
+"\\ \\ \\ \\ \\ \\ \\ \\		return head",
+"\\ \\ \\ \\	end",
+"\\ \\ \\ \\	prev = head",
+"\\ \\ \\ \\	while temp.nxt do",
+"\\ \\ \\ \\ \\ \\ \\ \\		if temp.key == key then",
+"\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\			prev.nxt = temp.nxt",
+"\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\			return head",
+"\\ \\ \\ \\ \\ \\ \\ \\		end",
+"\\ \\ \\ \\ \\ \\ \\ \\		prev = temp",
+"\\ \\ \\ \\ \\ \\ \\ \\		temp = temp.nxt",
+"\\ \\ \\ \\	end",
+"\\ \\ \\ \\	if key == temp.key then",
+"\\ \\ \\ \\		prev.nxt = nil",
+"\\ \\ \\ \\		return head",
+"\\ \\ \\ \\	end",
+"\\ \\ \\ \\	return head",
+"end"
+	}
+
+
+	startAnimation("yes","no")
+	loadListDefaults()
+	head = createList(nodes)
+	startFrameAndPicture()
+	showListPseudoCode(1)
+	drawLinkedList(head)
+	stopFrameAndPicture()
+	for i=1, #deleteKeys do 
+		head = deleteNode(deleteKeys[i], head)
+		startFrame(2)
+		beginPicture()
+		showListPseudoCode(1)
+		drawLinkedList(head)
+		stopFrameAndPicture()
+	end
+	stopAnimation()
+end
+
+function InsertNewNode(val, head)
+	newnode = {}
+	newnode.key = val
+	newnode.nxt = nil
+	newnode.color= "yellow"
+	if not head then
+		head = newnode
+	else
+		temp = head
+		while temp.nxt do
+			temp = temp.nxt
+		end
+		temp.nxt = newnode
+	end
+	return head
+end
+
+function createList(listItems)
+	head = nil
+	for i=1, #listItems do
+		head = InsertNewNode(listItems[i], head)
+	end	
+	return head
+end
+
+function listInsertion(listItems)
+	startAnimation("yes","no")
+	loadListDefaults()
+	head = nil
+	for i=1, #listItems do
+		head = InsertNewNode(listItems[i], head)
+		startFrameAndPicture()
+		drawLinkedList(head)
+		stopFrameAndPicture()
+	end	
+	stopAnimation()
+end
+
+\stopluacode

@@ -1,0 +1,114 @@
+\input ../API/arrayAPI
+
+\startluacode
+program = {"for j=1,n,1 do",
+"\\ \\ \\ \\ iMin = j",
+"\\ \\ \\ \\ for i = j+1,n,1 do",
+"\\ \\ \\ \\ \\ \\ \\ \\ if a[i] < a[iMin] then",
+"\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ iMin = i",
+"\\ \\ \\ \\ \\ \\ \\ \\ end",
+"\\ \\ \\ \\ end",
+"\\ \\ \\ \\ swap(j,iMin)",
+"end"
+}
+
+function refreshColors(array,yellowEndIndex,redIndex,blueIndex)
+	ccnt=1
+	while array[ccnt] do
+		if ccnt < yellowEndIndex then
+			array[ccnt].color = "(1,1,0.5)"
+		elseif ccnt < blueIndex then
+			array[ccnt].color = "(0.5,0.5,1)"
+		else
+			array[ccnt].color = "(0.9,0.9,0.9)"
+		end
+		ccnt= ccnt+1
+	end
+end 
+
+--algorithm implentations
+
+function swap(array,from,to)
+	temp = array[from]	
+	array[from] = array[to]
+	array[to] = temp
+end
+
+function selectionSort(input)
+	startAnimation("yes","no")
+	array=initArray(input)
+	i = 1
+	local frameCount = 0
+	for j,node in ipairs(array) do
+		print("before = "..framecount)
+		iMin = j
+		refreshColors(array,j,iMin,0)
+		context("\\frame{")
+		beginPicture()
+		showPseudoCode(1)
+		markers={}
+		markers = addMarker(markers, j, 10, "j", indColor1)
+		markers = addMarker(markers, iMin, 30, "Min", indColor2)
+		drawArray(array,markers)
+		endPicture()
+		context("}")
+
+		context("\\frame{")
+		beginPicture()
+		showPseudoCode(2)
+		drawArray(array,markers)
+		endPicture()
+		context("}")
+		print("after = "..framecount)
+		for i = j+1,#array,1 do
+			refreshColors(array,j,iMin,i)
+
+			context("\\frame[-]{")
+			beginPicture()
+			showPseudoCode(3)
+			markers={}
+			markers = addMarker(markers, j, 10, "j", indColor1)
+			markers = addMarker(markers, iMin, 30, "Min", indColor2)
+			markers = addMarker(markers, i, 20, "i", indColor3)
+			drawArray(array,markers)
+			endPicture()
+			context("}")
+
+			context("\\frame[-]{")
+			beginPicture()
+			showPseudoCode(4)
+			drawArray(array,markers)
+			endPicture()
+			context("}")
+
+			if array[i].key < array[iMin].key then
+				iMin = i
+				context("\\frame{")
+				beginPicture()
+				showPseudoCode(5)
+				drawArray(array,markers)
+				endPicture()
+				context("}")
+			end
+
+		end
+		if iMin == j  then
+			flag = 1
+		else
+			swap(array,j,iMin)
+		end
+		iMin = j
+		refreshColors(array,j,iMin,i)
+		context("\\frame[+]{")
+		beginPicture()
+		showPseudoCode(8)
+		markers={}
+		markers = addMarker(markers, j, 10, "j", indColor1)
+		markers = addMarker(markers, iMin, 30, "Min", indColor2)
+		drawArray(array,markers)
+		endPicture()
+		context("}")
+	end
+	stopAnimation()
+end
+\stopluacode
